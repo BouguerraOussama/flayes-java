@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class MyDataBase {
 
-        private final String URL = "jdbc:mysql://localhost:3306/ff";
+        private final String URL = "jdbc:mysql://localhost:3306/integration_flayes";
         private final String USER = "root";
         private final String PASS = "";
         private Connection connection;
