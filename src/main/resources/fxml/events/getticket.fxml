@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxWidth="860.0" prefHeight="580.0" prefWidth="860.0" styleClass="form_pane" stylesheets="@../../style/offers/offersBG.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.events.getticket">
+    <children>
+        <TabPane prefHeight="590.0" prefWidth="860.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Untitled Tab 1">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="505.0">
+                     <children>
+                        <Pane fx:id="myanchor" layoutX="14.0" layoutY="14.0" prefHeight="480.0" prefWidth="564.0" stylesheets="@../../style/events/tickets.css">
+                           <children>
+                              <Label fx:id="description" layoutX="359.0" layoutY="100.0" text="Description" />
+                              <Label fx:id="eventIdLabel" layoutX="341.0" layoutY="38.0" text="eventIdLabel" visible="false" />
+                              <Label layoutX="208.0" layoutY="27.0" text="My Ticket" />
+                              <Label layoutX="52.0" layoutY="100.0" stylesheets="@../../style/events/tickets.css" text="Description" />
+                              <Label layoutX="388.0" layoutY="140.0" />
+                              <Label fx:id="dateec" layoutX="386.0" layoutY="154.0" text="date" />
+                              <Label layoutX="75.0" layoutY="154.0" text="Date" />
+                              <Label layoutX="60.0" layoutY="227.0" text="Location" />
+                              <Label fx:id="locationcc" layoutX="403.0" layoutY="227.0" text="Location" />
+                              <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" layoutX="349.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </Pane>
+                        <Button layoutX="618.0" layoutY="469.0" mnemonicParsing="false" onAction="#Add" prefWidth="163.0" styleClass="custom-button" stylesheets="@../../style/events/ticket.css" text="Print my ticket" />
+                     </children>
+                     <stylesheets>
+                        <URL value="@../../style/events/events.css" />
+                        <URL value="@../../style/events/ticket.css" />
+                     </stylesheets>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Untitled Tab 2">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</Pane>

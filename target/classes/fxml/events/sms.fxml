@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.events.SmsController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <!-- Integrated content from provided FXML -->
+    <children>
+        <TextField fx:id="messageTextField" layoutX="48.0" layoutY="34.0" promptText="Entrez votre message"/>
+        <Button layoutX="110.0" layoutY="99.0" onAction="#envoyerSMS" text="Envoyer"/>
+    </children>
+
+</AnchorPane>

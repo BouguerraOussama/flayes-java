@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.forum.UpdatePostController" style="-fx-background-color: #070F2B;">
+    <children>
+        <TextField fx:id="authorTF" layoutX="111.0" layoutY="163.0" prefHeight="27.0" prefWidth="275.0" />
+        <TextField fx:id="contentTF" alignment="TOP_LEFT" layoutX="111.0" layoutY="220.0" prefHeight="120.0" prefWidth="275.0" />
+        <ImageView fx:id="image" fitHeight="107.0" fitWidth="147.0" layoutX="409.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+        <Button layoutX="458.0" layoutY="313.0" mnemonicParsing="false" onAction="#update" prefHeight="32.0" prefWidth="86.0" text="Update " styleClass="category" stylesheets="@../../style/offers/category.css" textFill="WHITE" />
+        <Label fx:id="author" layoutX="41.0" layoutY="168.0" text="author" style="-fx-text-fill: #ffff;"/>
+        <TextField fx:id="img_path" layoutX="111.0" layoutY="102.0" prefHeight="27.0" prefWidth="275.0" />
+        <Button layoutX="32.0" layoutY="102.0" mnemonicParsing="false" onAction="#upload_img" text="Upload" styleClass="category" stylesheets="@../../style/offers/category.css" textFill="WHITE" />
+        <ImageView fx:id="image_view" fitHeight="150.0" fitWidth="176.0" layoutX="410.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+    </children>
+</AnchorPane>

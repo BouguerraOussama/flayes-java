@@ -1,0 +1,172 @@
+* {
+    -fx-primary : #535C91;
+    -fx-secondary : #1B1A55;
+    -fx-third: #070F2B;
+    -fx-forth: #9290C3;
+}
+Pane{
+    -fx-background-color : -fx-secondary;
+}
+.root{
+    -fx-background-radius: 20;
+    -fx-background-color: -fx-secondary;
+}
+/*TablPane styling*/
+
+.tab {
+    -fx-background-color : -fx-secondary;
+    -fx-min-width: 50;
+    -fx-pref-height: 60;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 40px;
+    -fx-cursor: hand;
+    -fx-text-base-color: white;
+}
+.tab-image{
+    -fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);
+}
+
+.tab:selected {
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: white;
+}
+.tab:hover {
+    -fx-border-width: 0px 0px 4px 0px;
+    -fx-border-color: white;
+}
+.tab-header-background{
+    -fx-background-radius: 20 20 0 0;
+    -fx-background-color: -fx-secondary;
+}
+.tab-content-bg{
+    -fx-background-color: -fx-secondary;
+    -fx-background-radius:  20;
+}
+#gradiant{
+    -fx-background-color: linear-gradient(to bottom left, -fx-primary, -fx-forth);
+    -fx-background-radius: 20;
+}
+.text-field {
+    -fx-background-color:#070F2B;
+    -fx-effect: dropshadow(gaussian, rgb(84, 113, 231), 10, 0, 0, 1);
+    -fx-border-width:0px 0.5px 0.5px 0px;
+    -fx-prompt-text-fill:#a9afc7;
+    -fx-text-fill: #a9afc7;
+    -fx-font-size: 18;
+}
+/*.text-field:focused {*/
+/*    -fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);*/
+/*}*/
+.text-area{
+    -fx-control-inner-background:#070F2B;
+    -fx-effect: dropshadow(gaussian, rgb(84, 113, 231), 10, 0, 0, 1);
+    -fx-border-width:0px 0.5px 0.5px 0px;
+    -fx-prompt-text-fill:#a9afc7;
+    -fx-text-fill: #a9afc7;
+    -fx-font-size: 18;
+}
+.text-area:focused{
+    -fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);
+}
+.submit{
+    -fx-background-color: -fx-third;
+    -fx-effect: dropshadow(gaussian, rgb(255, 255, 255), 10, 0, 0, 1);
+    -fx-background-radius: 30;
+    -fx-border-width: 0;
+}
+.submit:hover{
+    -fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);
+}
+.thumb{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20;
+}
+
+.scroll-pane {
+    -fx-background-color: -fx-secondary ;
+    -fx-background-radius: 0 0 20 20;
+}
+.scroll-bar:vertical {
+    /*-fx-pref-width: 0.8em;*/
+    -fx-pref-width: 0.8em;
+    -fx-background-color:  -fx-secondary;
+    /*-fx-border-width: 0;*/
+    /*-fx-border-color: black;*/
+    /*-fx-border-width: 1px;*/
+    /*-fx-border-radius: 20;*/
+}
+
+
+.scroll-pane > .scroll-bar:vertical > .increment-button,
+.scroll-pane > .scroll-bar:vertical > .decrement-button {
+    -fx-padding: 0 0 0 0;
+}
+.scroll-bar > .increment-button,
+.scroll-bar > .decrement-button {
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar:vertical > .increment-button,
+.scroll-bar:vertical > .decrement-button {
+    -fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+}
+
+.scroll-bar:vertical > .decrement-button > .decrement-arrow {
+    -fx-padding: 0 0 0 0;
+}
+.scroll-bar:vertical > .increment-button > .increment-arrow {
+    -fx-padding: 0 0 0 0;
+}
+
+
+
+.scroll-pane > .scroll-bar:horizontal > .increment-button,
+.scroll-pane > .scroll-bar:horizontal > .decrement-button {
+    -fx-padding: 0 0 0 0;
+}
+.scroll-bar > .increment-button,
+.scroll-bar > .decrement-button {
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar:horizontal > .increment-button,
+.scroll-bar:horizontal > .decrement-button {
+    -fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+}
+
+.scroll-bar:horizontal > .decrement-button > .decrement-arrow {
+    -fx-padding: 0 0 0 0;
+}
+.scroll-bar:horizontal > .increment-button > .increment-arrow {
+    -fx-padding: 0 0 0 0;
+}
+
+.combo-box {
+    -fx-background-color: -fx-third;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-text-fill: white;
+    -fx-max-height: 45px;
+    -fx-max-width: 350px;
+    -fx-padding: 0.667em 1.667em 0.667em 1.333em;
+    -fx-font-size: 14px;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow-button .arrow {
+    -fx-background-color: #495057;
+    -fx-padding: 0.333em;
+}
+
+.combo-box .arrow-button:hover .arrow {
+    -fx-background-color: #343a40;
+}
+
+.combo-box .arrow-button:pressed .arrow {
+    -fx-background-color: #212529;
+}
+
