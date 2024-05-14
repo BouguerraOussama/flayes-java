@@ -1,5 +1,4 @@
 package controllers.mainPage;
-
 import controllers.forum.AddRoomController;
 import controllers.users.Profil;
 import javafx.application.Platform;
@@ -9,7 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -18,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.users.User;
+import okhttp3.*;
 import services.users.UserService;
 import utils.SessionManager;
 
@@ -25,10 +25,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.List;
 
-public class Front {@FXML
-private Button btn_drop;
+public class Front {
+    @FXML
+    private Button btn_drop;
     @FXML
     private BorderPane Main_content;
     @FXML
@@ -62,8 +64,8 @@ private Button btn_drop;
     @FXML
     void initialize(URL url, ResourceBundle rb) {
         setActive(btn_home);
-       // user = us.getUserConnected();
-        user=us.getUserById(SessionManager.getInstance().getUser_id());
+        // user = us.getUserConnected();
+        user = us.getUserById(SessionManager.getInstance().getUser_id());
         // Get the user and load the image
         String imagePath = "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-\\src\\main\\resources\\images\\";
         String imageFileName = "femme.png";
@@ -100,7 +102,7 @@ private Button btn_drop;
         setActive(btn_project);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/fxml/projects/AddProject.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/fxml/ChatGPTApp.fxml"));
             view = fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -125,17 +127,22 @@ private Button btn_drop;
     @FXML
     void EventsButtonClicked(ActionEvent actionEvent) {
         setActive(btn_events);
-       // user = us.getUserConnected();
-        user=us.getUserById(SessionManager.getInstance().getUser_id());
+        // user = us.getUserConnected();
+        user = us.getUserById(SessionManager.getInstance().getUser_id());
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/fxml/events/Ticketclient.fxml"));
             view = fxmlLoader.load();
+
+            // Show language selection dialog for translation
+           // showLanguageSelectionDialog(view);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         Main_content.setCenter(view);
     }
+
 
     @FXML
     void ForumButtonClicked(ActionEvent actionEvent) {
@@ -146,7 +153,7 @@ private Button btn_drop;
             fxmlLoader.setLocation(getClass().getResource("/fxml/forum/AddRoom.fxml"));
             AddRoomController AddRoom = fxmlLoader.getController();
             view = fxmlLoader.load();
-        }  catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
         Main_content.setCenter(view);
@@ -160,7 +167,7 @@ private Button btn_drop;
             fxmlLoader.setLocation(getClass().getResource("/fxml/users/ShowReclamation.fxml"));
             view = fxmlLoader.load();
             //user = us.getUserConnected();
-            user=us.getUserById(SessionManager.getInstance().getUser_id());
+            user = us.getUserById(SessionManager.getInstance().getUser_id());
             // Get the user and load the image
             String imagePath = "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-\\src\\main\\resources\\images\\";
             String imageFileName = user.getImage_name();
@@ -186,7 +193,7 @@ private Button btn_drop;
         Node node = fxmlLoader.load();
         AnchorPane pane = new AnchorPane(node);
         //user = us.getUserConnected();
-        user=us.getUserById(SessionManager.getInstance().getUser_id());
+        user = us.getUserById(SessionManager.getInstance().getUser_id());
         MainPageController.getChildren().setAll(pane);
         us.logOut(user);
     }
@@ -194,8 +201,8 @@ private Button btn_drop;
     @FXML
     void profilButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
         setActive(profil);
-       // user = us.getUserConnected();
-        user=us.getUserById(SessionManager.getInstance().getUser_id());
+        // user = us.getUserConnected();
+        user = us.getUserById(SessionManager.getInstance().getUser_id());
         pc.setConnected(user);
         System.out.println("openProfil" + user.toString());
         FXMLLoader loader = new FXMLLoader();
@@ -231,4 +238,9 @@ private Button btn_drop;
         button.getStyleClass().add("btn_active");
         activeButton = button;
     }
+
+
+
+
+   
 }

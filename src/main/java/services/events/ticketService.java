@@ -21,15 +21,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ticketService  {
+public class ticketService {
 
     private Connection connection;
 
     public ticketService() {
         connection = MyDataBase.getInstance().getConnection();
     }
-
-
 
 
     public void create(Ticket ticket) throws SQLException {
@@ -45,7 +43,6 @@ public class ticketService  {
     }
 
 
-
     public void update(Ticket ticket) throws SQLException {
         String sql = "UPDATE Ticket SET Idevent = ?, Iduser = ? WHERE Idticket = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -55,6 +52,7 @@ public class ticketService  {
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }
+
     public String getName(int eventId) throws SQLException {
         String name = null;
         String sql = "SELECT name FROM event WHERE Idevent = ?";
@@ -122,6 +120,7 @@ public class ticketService  {
         statement.close();
         return tickets;
     }
+
     public void search(int id) throws SQLException {
         String sql = "SELECT e.* FROM event e INNER JOIN ticket t ON e.idevent = t.idevent WHERE t.Iduser = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -174,16 +173,12 @@ public class ticketService  {
     } */
 
 
-
-
-
-
     public void generatePDF(int eventId, String description, String date, String location, String barcodePath, String barcodeText) {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
         String timestamp = now.format(formatter);
         String pdfFileName = "event_ticket_" + timestamp + ".pdf";
-        String pdfPath = "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-\\src\\main\\resources\\images\\" + pdfFileName;
+        String pdfPath = "C:/xampp/htdocs/tickets/" + pdfFileName; // Adjust this path accordingly
 
         try (PdfWriter writer = new PdfWriter(pdfPath);
              PdfDocument pdfDoc = new PdfDocument(writer);
@@ -239,8 +234,8 @@ public class ticketService  {
         } catch (IOException e) {
             System.err.println("Error creating PDF document: " + e.getMessage());
         }
-    }}
-
+    }
+}
 
 /* public void generatePDF(String eventId, String descriptionText, String barcodeImagePath) throws IOException {
     // Create a new document

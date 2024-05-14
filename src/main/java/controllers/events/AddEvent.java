@@ -1,10 +1,5 @@
 package controllers.events;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,12 +9,17 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.events.Category;
-import models.events.Event;
 import services.events.CatService;
 import services.events.EventService;
+import models.events.Event;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.common.BitMatrix;
+import javafx.scene.control.Alert;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -29,7 +29,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class AddEvent {
 
     private final EventService ps = new EventService();
@@ -209,6 +213,7 @@ public class AddEvent {
     }
 
 
+
     private String generateUniqueQRCodeFilename() {
         // Generate a unique filename based on current timestamp
         return "qrcode_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + ".png";
@@ -225,17 +230,41 @@ public class AddEvent {
         MatrixToImageWriter.writeToStream(bitMatrix, fileType, outputStream);
         byte[] qrCodeBytes = outputStream.toByteArray();
 
-        // Get the current working directory (base directory of the project)
-        String currentDirectory = System.getProperty("user.dir");
-
-        // Construct the file path for the QR code image in the current directory
-        String qrCodePath = "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-" + File.separator + filename;
-
         // Save QR code image to file
-        Files.write(Paths.get(qrCodePath), qrCodeBytes);
+        saveToResources(qrCodeBytes, filename);
+        saveToServer(qrCodeBytes, filename);
     }
 
+    private void saveToResources(byte[] qrCodeBytes, String filename) throws IOException {
+        // Save QR code image to resources directory
+        String resourcesPath = getResourcesPath();
+        String qrCodeDirectory = resourcesPath + File.separator + "qr_code";
+        Files.createDirectories(Paths.get(qrCodeDirectory));
+        Files.write(Paths.get(qrCodeDirectory + File.separator + filename), qrCodeBytes);
+    }
 
+    private void saveToServer(byte[] qrCodeBytes, String filename) throws IOException {
+        // Save QR code image to server directory (htdocs/qr)
+        String serverPath = getServerPath();
+        String qrDirectory = serverPath + File.separator + "qr";
+        Files.createDirectories(Paths.get(qrDirectory));
+        Files.write(Paths.get(qrDirectory + File.separator + filename), qrCodeBytes);
+    }
+
+    private String getResourcesPath() {
+        return new File("src/main/resources").getAbsolutePath();
+    }
+
+    private String getServerPath() {
+        String serverPath = "";
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.contains("win")) {
+            serverPath = "C:/xampp/htdocs";
+        } else if (osName.contains("nix") || osName.contains("nux") || osName.contains("aix")) {
+            serverPath = "/opt/lampp/htdocs";
+        }
+        return serverPath;
+    }
 
     private boolean isValidDateFormat(String date) {
         // Regular expression to match "dd/mm/yyyy" format

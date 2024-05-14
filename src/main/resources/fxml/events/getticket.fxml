@@ -35,7 +35,7 @@
                         <Button layoutX="618.0" layoutY="469.0" mnemonicParsing="false" onAction="#Add" prefWidth="163.0" styleClass="custom-button" stylesheets="@../../style/events/ticket.css" text="Print my ticket" />
                      </children>
                      <stylesheets>
-                        <URL value="@../../style/events/events.css" />
+                        <URL value="@../../style/events/ticket.css" />
                         <URL value="@../../style/events/ticket.css" />
                      </stylesheets>
                         </AnchorPane>

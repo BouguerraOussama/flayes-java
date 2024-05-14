@@ -1,0 +1,30 @@
+/* chatgpt.css */
+
+/* Chat Area */
+.chat-area {
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 10px;
+}
+
+/* Chat Input Field */
+.chat-area .text-field {
+    -fx-font-size: 14px;
+}
+
+/* Chat Send Button */
+.chat-area .button {
+    -fx-background-color: #4CAF50; /* Green */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+}
+
+/* Chat Messages */
+.chat-area .text-area {
+    -fx-font-size: 14px;
+    -fx-wrap-text: true;
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
