@@ -2,19 +2,19 @@ package models.forum;
 
 public class Reacts {
     private int react_id,post_id, user_id;
-    boolean Islike;
+    boolean Isliked;
 
     public Reacts(int idReact, int idReactedPost,int idAuthor, boolean islike) {
         react_id = idReact;
         post_id = idReactedPost;
         user_id = idAuthor;
-        Islike = islike;
+        Isliked = islike;
     }
 
     public Reacts(int idReactedPost,int idAuthor, boolean islike) {
         post_id = idReactedPost;
         user_id = idAuthor;
-        Islike = islike;
+        Isliked = islike;
     }
 
 
@@ -24,7 +24,7 @@ public class Reacts {
                 "IdReact=" + react_id +
                 ", IdReactedPost=" + post_id +
                 ", IdAuthor=" + user_id +
-                ", Islike=" + Islike +
+                ", Islike=" + Isliked +
                 '}';
     }
 
@@ -53,10 +53,10 @@ public class Reacts {
     }
 
     public boolean Islike() {
-        return Islike;
+        return Isliked;
     }
 
     public void setIslike(boolean islike) {
-        Islike = islike;
+        Isliked = islike;
     }
 }

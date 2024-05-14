@@ -35,11 +35,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
+import org.asynchttpclient.*;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.scene.control.TextField;
 
 public class AddRoomController {
 
     private final RoomService rs = new RoomService();
+    private static Timer searchTimeoutToken;
+
     private int Room_id;
     public Label cat;
     public Label subcat;
@@ -210,7 +217,7 @@ public class AddRoomController {
         // Map category names to image paths
         Map<String, String> categoryImageMap = new HashMap<>();
         categoryImageMap.put("Finance", "/Users/khalil/Desktop/Java Projects/Forum/Flayes-Flayes-/src/main/resources/images/Finance.jpg");
-        categoryImageMap.put("Agriculture", "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-\\src\\main\\resources\\images\\agriculture.jpg");
+        categoryImageMap.put("Agriculture", "/Users/khalil/Desktop/Java Projects/Forum/Flayes-Flayes-/src/main/resources/images/agriculture.jpg");
         categoryImageMap.put("Industry", "/Users/khalil/Desktop/Java Projects/Forum/Flayes-Flayes-/src/main/resources/images/Industry.jpg");
         categoryImageMap.put("Art", "/Users/khalil/Desktop/Java Projects/Forum/Flayes-Flayes-/src/main/resources/images/art.jpg");
         categoryImageMap.put("Business", "/Users/khalil/Desktop/Java Projects/Forum/Flayes-Flayes-/src/main/resources/images/business.jpg");
@@ -331,55 +338,105 @@ public class AddRoomController {
 
     }
 
+//    @FXML
+//    void AutoSuggestion() {
+//        descriptionTF.setOnKeyTyped(keyEvent -> {
+//            String input = keyEvent.getCharacter();
+//            if (!input.isEmpty()) { // Check if input is not empty (not a delete key)
+//                AsyncHttpClient client = new DefaultAsyncHttpClient();
+//                client.prepare("GET", "https://auto-suggest-queries.p.rapidapi.com/suggestqueries?query=+"+input+"%20to")
+//                        .setHeader("X-RapidAPI-Key", "77280ef4bfmsh5a1c660eaa091abp16b165jsned5b547e4d20")
+//                        .setHeader("X-RapidAPI-Host", "auto-suggest-queries.p.rapidapi.com")
+//                        .execute()
+//                        .toCompletableFuture()
+//                        .thenAccept(response -> {
+//                            try {
+//                                int status = response.getStatusCode();
+//                                if (status == 200) {
+//                                    String responseBody = response.getResponseBody();
+//                                    JsonArray jsonArray = JsonParser.parseString(responseBody).getAsJsonArray();
+//                                    if (!jsonArray.isEmpty()) {
+//                                        String firstSuggestion = jsonArray.get(0).getAsString();
+//                                        System.out.println("First suggestion: " + firstSuggestion);
+//                                        Platform.runLater(() -> descriptionTF.setText(firstSuggestion));
+//                                    } else {
+//                                        System.out.println("No suggestions found.");
+//                                    }
+//                                } else {
+//                                    System.out.println("HTTP error: " + status);
+//                                }
+//                            } catch (JsonParseException e) {
+//                                System.err.println("Error processing response: " + e.getMessage());
+//                            }
+//                        })
+//                        .exceptionally(ex -> {
+//                            System.err.println("Error executing request: " + ex.getMessage());
+//                            return null;
+//                        })
+//                        .thenRun(()->{
+//                            try{
+//                                client.close();
+//                            }catch(IOException ex){
+//                                try {
+//                                    throw new IOException();
+//                                } catch (IOException e) {
+//                                    throw new RuntimeException(e);
+//                                }
+//                            }
+//                        });
+//            }
+//        });
+//    }
+
     @FXML
-    void AutoSuggestion() {
-        descriptionTF.setOnKeyTyped(keyEvent -> {
-            String input = keyEvent.getCharacter();
-            if (!input.isEmpty()) { // Check if input is not empty (not a delete key)
-                AsyncHttpClient client = new DefaultAsyncHttpClient();
-                client.prepare("GET", "https://auto-suggest-queries.p.rapidapi.com/suggestqueries?query=+"+input+"%20to")
-                        .setHeader("X-RapidAPI-Key", "77280ef4bfmsh5a1c660eaa091abp16b165jsned5b547e4d20")
-                        .setHeader("X-RapidAPI-Host", "auto-suggest-queries.p.rapidapi.com")
-                        .execute()
-                        .toCompletableFuture()
-                        .thenAccept(response -> {
-                            try {
-                                int status = response.getStatusCode();
-                                if (status == 200) {
-                                    String responseBody = response.getResponseBody();
-                                    JsonArray jsonArray = JsonParser.parseString(responseBody).getAsJsonArray();
-                                    if (!jsonArray.isEmpty()) {
-                                        String firstSuggestion = jsonArray.get(0).getAsString();
-                                        System.out.println("First suggestion: " + firstSuggestion);
-                                        Platform.runLater(() -> descriptionTF.setText(firstSuggestion));
-                                    } else {
-                                        System.out.println("No suggestions found.");
-                                    }
-                                } else {
-                                    System.out.println("HTTP error: " + status);
-                                }
-                            } catch (JsonParseException e) {
-                                System.err.println("Error processing response: " + e.getMessage());
-                            }
-                        })
-                        .exceptionally(ex -> {
-                            System.err.println("Error executing request: " + ex.getMessage());
-                            return null;
-                        })
-                        .thenRun(()->{
-                            try{
-                                client.close();
-                            }catch(IOException ex){
-                                try {
-                                    throw new IOException();
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            }
-                        });
+    void AutoSuggestion(){
+        descriptionTF.setOnKeyReleased(keyEvent -> {
+            String input = descriptionTF.getText().trim(); // Get text from TextField
+            if (!input.isEmpty()) {
+                if (searchTimeoutToken != null) {
+                    searchTimeoutToken.cancel(); // Cancel previous timer if exists
+                }
+                searchTimeoutToken = new Timer();
+                searchTimeoutToken.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        Platform.runLater(() -> autoSuggestion(input)); // Run autosuggest after delay
+                    }
+                }, 250); // Delay of 250 milliseconds
             }
         });
     }
+
+    public void autoSuggestion(String input) {
+        AsyncHttpClient client = new DefaultAsyncHttpClient();
+        try {
+            Response response = client.prepare("GET", "https://auto-suggest-queries.p.rapidapi.com/suggestqueries")
+                    .addQueryParam("query", input)
+                    .addHeader("X-RapidAPI-Key", "77280ef4bfmsh5a1c660eaa091abp16b165jsned5b547e4d20")
+                    .addHeader("X-RapidAPI-Host", "auto-suggest-queries.p.rapidapi.com")
+                    .execute()
+                    .toCompletableFuture()
+                    .get();
+            int status = response.getStatusCode();
+            if (status == 200) {
+                String responseBody = response.getResponseBody();
+                String suggestion = responseBody.split("\"")[3];
+                System.out.println("Suggestion: " + suggestion);
+                Platform.runLater(() -> descriptionTF.setText(suggestion));
+            } else {
+                System.out.println("HTTP error: " + status);
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                client.close();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+
 
 
 

@@ -3,7 +3,6 @@
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -79,24 +78,24 @@
                                                                         </FXCollections>
                                                                     </items>
                                                                 </ChoiceBox>
-                                                <TextField fx:id="sub_categoryTF" layoutX="14.0" layoutY="91.0" prefHeight="35.0" prefWidth="430.0" promptText="Sub Category" />
-                                                                  <Label fx:id="descriptionError" layoutX="15.0" layoutY="228.0" prefHeight="45.0" prefWidth="94.0" text="Description error" textFill="RED" />
-                                                                  <Label fx:id="descriptionSuccess" layoutX="15.0" layoutY="225.0" prefHeight="16.0" prefWidth="107.0" text="Description valid" textFill="#09ff00" />
-                                                <Label fx:id="SubcatSuccess" layoutX="15.0" layoutY="131.0" text="sub_category valid" textFill="#09ff00" />
-                                                <Label fx:id="SubcatError" layoutX="15.0" layoutY="148.0" prefHeight="17.0" prefWidth="112.0" text="sub_category error" textFill="RED" />
-                                                              <VBox id="category_vbox" fx:id="Buttons" alignment="TOP_CENTER" layoutX="136.0" layoutY="227.0" prefHeight="176.0" prefWidth="221.0" style="-fx-spacing: 10;" stylesheets="@../../style/offers/category.css">
-                                                                  <children>
-                                                                      <VBox prefHeight="0.0" prefWidth="388.0" />
+                                                                <TextField fx:id="sub_categoryTF" layoutX="14.0" layoutY="91.0" prefHeight="35.0" prefWidth="430.0" promptText="Sub Category" />
+                                                                <Label fx:id="descriptionError" layoutX="15.0" layoutY="228.0" prefHeight="45.0" prefWidth="94.0" text="Description error" textFill="RED" />
+                                                                <Label fx:id="descriptionSuccess" layoutX="15.0" layoutY="225.0" prefHeight="16.0" prefWidth="107.0" text="Description valid" textFill="#09ff00" />
+                                                                <Label fx:id="SubcatSuccess" layoutX="15.0" layoutY="131.0" text="sub_category valid" textFill="#09ff00" />
+                                                                <Label fx:id="SubcatError" layoutX="15.0" layoutY="148.0" prefHeight="17.0" prefWidth="112.0" text="sub_category error" textFill="RED" />
+                                                                <VBox id="category_vbox" fx:id="Buttons" alignment="TOP_CENTER" layoutX="136.0" layoutY="227.0" prefHeight="176.0" prefWidth="221.0" style="-fx-spacing: 10;" stylesheets="@../../style/offers/category.css">
+                                                                    <children>
+                                                                        <VBox prefHeight="0.0" prefWidth="388.0" />
                                                                         <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" styleClass="tab-image">
                                                                             <!--                                                                            <image>-->
                                                                             <!--                                                                                <Image url="@../../images/equity.png" />-->
                                                                             <!--                                                                            </image>-->
                                                                         </ImageView>
-                                                                      <Button id="category" fx:id="AddRoomBtn" mnemonicParsing="false" onAction="#AddRoom" prefHeight="27.0" prefWidth="124.0" styleClass="category" stylesheets="@../../style/offers/category.css" text="Add Room" textFill="WHITE" />
-                                                      <Button id="category" fx:id="TranslateBtn" mnemonicParsing="false" onAction="#translate" prefHeight="27.0" prefWidth="124.0" styleClass="category" stylesheets="@../../style/offers/category.css" text="Translate" textFill="WHITE" />
-                                                      <Button id="category" fx:id="ViewStatisticsBtn" mnemonicParsing="false" onAction="#ViewStatistics" prefHeight="27.0" prefWidth="126.0" styleClass="category" stylesheets="@../../style/offers/category.css" text="View Statistics" textFill="WHITE" />
-                                                                  </children>
-                                                              </VBox>
+                                                                        <Button id="category" fx:id="AddRoomBtn" mnemonicParsing="false" onAction="#AddRoom" prefHeight="27.0" prefWidth="124.0" styleClass="category" stylesheets="@../../style/offers/category.css" text="Add Room" textFill="WHITE" />
+                                                                        <Button id="category" fx:id="TranslateBtn" mnemonicParsing="false" onAction="#translate" prefHeight="27.0" prefWidth="124.0" styleClass="category" stylesheets="@../../style/offers/category.css" text="Translate" textFill="WHITE" />
+                                                                        <Button id="category" fx:id="ViewStatisticsBtn" mnemonicParsing="false" onAction="#ViewStatistics" prefHeight="27.0" prefWidth="126.0" styleClass="category" stylesheets="@../../style/offers/category.css" text="View Statistics" textFill="WHITE" />
+                                                                    </children>
+                                                                </VBox>
                                                             </children>
                                                         </Pane>
                                                     </children>
@@ -118,10 +117,7 @@
                                                         <ImageView fx:id="room_type_icon" fitHeight="147.0" fitWidth="193.0" layoutX="16.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
                                                     </children>
                                                 </Pane>
-                                                <VBox fx:id="Investment_type_Pane" alignment="CENTER" layoutX="13.0" layoutY="254.0" prefHeight="217.0" prefWidth="355.0" spacing="30.0">
-                                       <children>
-                                          <PieChart fx:id="RoomStatistics" prefHeight="203.0" prefWidth="355.0" />
-                                       </children></VBox>
+                                                <VBox fx:id="Investment_type_Pane" alignment="CENTER" layoutX="13.0" layoutY="254.0" prefHeight="217.0" prefWidth="355.0" spacing="30.0" />
                                             </children>
                                         </Pane>
                                     </children>
@@ -131,9 +127,9 @@
                     </content>
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="tab-image">
-                     <image>
-                        <Image url="@../../images/expand.png" />
-                     </image></ImageView>
+                            <image>
+                                <Image url="@../../images/expand.png" />
+                            </image></ImageView>
                     </graphic>
                 </Tab>
                 <Tab text="Rooms">
@@ -147,33 +143,33 @@
                                         <TableColumn fx:id="DescriptionCol" prefWidth="177.0" text="Description" />
                                     </columns>
                                 </TableView>
-                        <Button id="category" fx:id="UpdateRoom" alignment="CENTER_RIGHT" layoutX="670.0" layoutY="412.0" mnemonicParsing="false" onAction="#UpdateRoom" prefHeight="27.0" prefWidth="79.0" styleClass="category" stylesheets="@../../style/offers/category.css" text="Update" textFill="WHITE" />
-                        <ImageView fx:id="" fitHeight="14.0" fitWidth="15.0" layoutX="677.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true" styleClass="tab-image">
-                           <image>
-                              <Image url="@../../images/plus.png" />
-                           </image>
-                        </ImageView>
-                        <Button id="category" fx:id="DeleteRoom" alignment="CENTER_RIGHT" layoutX="564.0" layoutY="413.0" mnemonicParsing="false" onAction="#deleteRoom" prefHeight="27.0" prefWidth="79.0" styleClass="category" stylesheets="@../../style/offers/category.css" text="Delete" textFill="WHITE" />
-                        <ImageView fitHeight="16.0" fitWidth="17.0" layoutX="574.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true" styleClass="tab-image">
-                           <image>
-                              <Image url="@../../images/drop.png" />
-                           </image>
-                        </ImageView>
-                        <Button layoutX="774.0" layoutY="14.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="45.0" styleClass="category" stylesheets="@../../style/offers/category.css" />
-                        <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="788.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/fleche-dactualisation.png" />
-                           </image>
-                        </ImageView>
-                        <Button id="category" fx:id="ViewPostsBtn" alignment="CENTER_RIGHT" layoutX="126.0" layoutY="422.0" mnemonicParsing="false" onAction="#ViewPosts" prefHeight="27.0" prefWidth="79.0" styleClass="category" stylesheets="@../../style/offers/category.css" text="View Posts" textFill="WHITE" />
+                                <Button id="category" fx:id="UpdateRoom" alignment="CENTER_RIGHT" layoutX="670.0" layoutY="412.0" mnemonicParsing="false" onAction="#UpdateRoom" prefHeight="27.0" prefWidth="79.0" styleClass="category" stylesheets="@../../style/offers/category.css" text="Update" textFill="WHITE" />
+                                <ImageView fx:id="" fitHeight="14.0" fitWidth="15.0" layoutX="677.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true" styleClass="tab-image">
+                                    <image>
+                                        <Image url="@../../images/plus.png" />
+                                    </image>
+                                </ImageView>
+                                <Button id="category" fx:id="DeleteRoom" alignment="CENTER_RIGHT" layoutX="564.0" layoutY="413.0" mnemonicParsing="false" onAction="#deleteRoom" prefHeight="27.0" prefWidth="79.0" styleClass="category" stylesheets="@../../style/offers/category.css" text="Delete" textFill="WHITE" />
+                                <ImageView fitHeight="16.0" fitWidth="17.0" layoutX="574.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true" styleClass="tab-image">
+                                    <image>
+                                        <Image url="@../../images/drop.png" />
+                                    </image>
+                                </ImageView>
+                                <Button layoutX="774.0" layoutY="14.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="45.0" styleClass="category" stylesheets="@../../style/offers/category.css" />
+                                <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="788.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../images/fleche-dactualisation.png" />
+                                    </image>
+                                </ImageView>
+                                <Button id="category" fx:id="ViewPostsBtn" alignment="CENTER_RIGHT" layoutX="126.0" layoutY="422.0" mnemonicParsing="false" onAction="#ViewPosts" prefHeight="27.0" prefWidth="79.0" styleClass="category" stylesheets="@../../style/offers/category.css" text="View Posts" textFill="WHITE" />
                             </children>
                         </AnchorPane>
                     </content>
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" styleClass="tab-image">
-                     <image>
-                        <Image url="@../../images/chat.png" />
-                     </image></ImageView>
+                            <image>
+                                <Image url="@../../images/chat.png" />
+                            </image></ImageView>
                     </graphic>
                 </Tab>
             </tabs>

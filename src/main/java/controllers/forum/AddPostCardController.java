@@ -86,7 +86,6 @@ public class AddPostCardController {
         String path = post.getImg_url();
         ImportPicture(path,img);
         authorTF.setText(post.getAuthor());
-        numbreOfComments.setText(String.valueOf(post.getNumber_of_comments()));
         numberOfDislikes.setText(String.valueOf(ps.readOne(post.getPost_id()).getNumDislikes()));
         numberOfLikes.setText(String.valueOf(ps.readOne(post.getPost_id()).getNumLikes()));
     }
