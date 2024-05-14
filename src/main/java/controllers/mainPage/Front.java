@@ -27,7 +27,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class Front {@FXML
+public class Front {
+    @FXML
 private Button btn_drop;
     @FXML
     private BorderPane Main_content;

@@ -3,7 +3,8 @@ package models.offers;
 import java.util.Date;
 
 public class Offer {
-    private int id ,funding_id,project_id,user_id,status;
+
+    private int id ,funding_id,project_id,user_id,status,reciever_id;
     private Date date_created;
     private String title, description;
 
@@ -99,6 +100,14 @@ public class Offer {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getReciever_id() {
+        return reciever_id;
+    }
+
+    public void setReciever_id(int reciever_id) {
+        this.reciever_id = reciever_id;
     }
 
     @Override

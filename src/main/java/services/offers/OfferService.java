@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class OfferService implements IService<Offer> {
-    private int fk;
+
     private Connection connection;
     public OfferService(){
         connection = MyDataBase.getInstance().getConnection();
@@ -31,16 +31,18 @@ public class OfferService implements IService<Offer> {
     }
 
     @Override
-    public int create(Offer offer)  {
+    public int create(Offer offer) throws SQLException  {
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-        String sql = "insert into offer (title, description, date_created,funding_id,project_id,status) values (?, ?, ?, ?,?,?)";
+        String sql = "insert into offer (title, description, status, date_created,funding_id,project_id,user_id,reciever_id) values (?,?, ?, ?,?,?,?,?)";
         try(PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setString(1, offer.getTitle());
             ps.setString(2, offer.getDescription());
-            ps.setTimestamp(3, currentTimestamp);
-            ps.setInt(4,offer.getFunding_id());
-            ps.setInt(5, offer.getProject_id());
-            ps.setInt(6, 0);
+            ps.setInt(3, 0);
+            ps.setTimestamp(4, currentTimestamp);
+            ps.setInt(5,offer.getFunding_id());
+            ps.setInt(6, offer.getProject_id());
+            ps.setInt(7, offer.getUser_id());
+            ps.setInt(8, offer.getReciever_id());
             ps.executeUpdate();
         }catch (SQLException e) {
             // Handle any exceptions here
@@ -67,7 +69,7 @@ public class OfferService implements IService<Offer> {
 
     @Override
     public List<Offer> read() throws SQLException {
-        String sql = "select * from offer where user_id = 1";
+        String sql = "select * from offer ";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
         List<Offer> offers = new ArrayList<>();
