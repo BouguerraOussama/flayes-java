@@ -14,6 +14,7 @@ public class OfferService implements IService<Offer> {
     public OfferService(){
         connection = MyDataBase.getInstance().getConnection();
     }
+
     public  int  getFk(String type) throws SQLException {
         String query = "SELECT id FROM funding WHERE type=?";
         PreparedStatement ps = connection.prepareStatement(query);
@@ -69,7 +70,7 @@ public class OfferService implements IService<Offer> {
 
     @Override
     public List<Offer> read() throws SQLException {
-        String sql = "select * from offer ";
+        String sql = "select * from offer";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
         List<Offer> offers = new ArrayList<>();
@@ -86,5 +87,30 @@ public class OfferService implements IService<Offer> {
         }
         return offers;
     }
+    public List<Offer> readOffersImade(int user_id) throws SQLException {
+        String query = "SELECT * FROM offer WHERE user_id = ?";
+        List<Offer> offers = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, user_id);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    Offer offer = new Offer();
+                    offer.setId(rs.getInt("id"));
+                    offer.setTitle(rs.getString("title"));
+                    offer.setDescription(rs.getString("description"));
+                    offer.setStatus(rs.getInt("status"));
+                    offer.setDate_created(rs.getDate("date_created"));
+                    offer.setFunding_id(rs.getInt("funding_id"));
+                    offer.setProject_id(rs.getInt("project_id"));
+                    offer.setUser_id(rs.getInt("user_id"));
+                    offer.setReciever_id(rs.getInt("reciever_id"));
+                    offers.add(offer);
+                }
+            }
+        }
+        return offers;
+    }
+
 
 }

@@ -19,6 +19,7 @@ public class OfferCardController {
     public Button denyOfferButton;
     public HBox buttonsContainer;
     private int OfferKey;
+
     public void setData(Offer offer) {
         OfferKey = offer.getId();
         this.offer_name.setText(offer.getTitle());
@@ -38,7 +39,7 @@ public class OfferCardController {
             buttonsContainer.getChildren().addAll(inspectOfferButton,editOfferButton);
         }else{
             buttonsContainer.getChildren().clear();
-            buttonsContainer.getChildren().addAll(inspectOfferButton,acceptOfferButton,denyOfferButton);
+            buttonsContainer.getChildren().addAll(inspectOfferButton,editOfferButton,acceptOfferButton,denyOfferButton);
         }
     }
 
