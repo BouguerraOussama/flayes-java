@@ -116,7 +116,7 @@ public class MainPageController {
         setActive(btn_invest);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/fxml/offers/AddOffer.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/fxml/offers/AdminOffers.fxml"));
             view = fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -1,5 +1,9 @@
 package controllers.offers;
 
+
+import com.stripe.Stripe;
+import com.stripe.model.checkout.Session;
+import com.stripe.param.checkout.SessionCreateParams;
 import controllers.projects.ProjectCardController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -19,7 +26,10 @@ import services.offers.OfferService;
 import services.projects.ProjectService;
 import utils.SessionManager;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +51,7 @@ public class OfferController {
     @FXML
     private Pane blur, form, inspectBg;
     @FXML
-    private VBox  offerCardsVbox,offerCardsVbox1, category_form_vbox, projects_list;
+    private VBox offerCardsVbox, offerCardsVbox1, category_form_vbox, projects_list;
 
     private Button activeButton;
     private final Button decoyButton = new Button();
@@ -159,11 +169,11 @@ public class OfferController {
 
     public void SubmitButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
         if (validateForm()) {
-          Category category = this.createCategory();
-          if(category!=null){
-              saveOffer(category);
-          }
-          resetForm();
+            Category category = this.createCategory();
+            if (category != null) {
+                saveOffer(category);
+            }
+            resetForm();
         }
     }
 
@@ -201,7 +211,7 @@ public class OfferController {
         try {
             int categoryId = categoryService.create(category);
             if (categoryId != -1) {
-                offerService.create(new Offer(categoryId, this.project.getId(), SessionManager.getInstance().getUser_id(),project.getUser_id(), offer_title_tf.getText(), offer_description_ta.getText()));
+                offerService.create(new Offer(categoryId, this.project.getId(), SessionManager.getInstance().getUser_id(), project.getUser_id(), offer_title_tf.getText(), offer_description_ta.getText()));
             }
         } catch (SQLException e) {
             showErrorDialog(e);
@@ -310,11 +320,19 @@ public class OfferController {
                 offerCardController.getEditOfferButton().setOnAction(event -> openFormForEdit(event, offer, category));
                 hideButton(offerCardController.getAcceptOfferButton());
                 hideButton(offerCardController.getDenyOfferButton());
+                if(offer.getStatus()==3){
+                    hideButton(offerCardController.getEditOfferButton());
+                    hideButton(offerCardController.getInspectOfferButton());
+
+                }else {
+                    hideButton(offerCardController.getPayUp());
+                }
             } catch (IOException e) {
                 showErrorDialog(e);
             }
         }
     }
+
     private void loadOffersIgot() throws SQLException, IOException {
         List<Offer> offers = offerService.readOffersIgot(SessionManager.getInstance().getUser_id());
         offerCardsVbox1.getChildren().clear();
@@ -328,11 +346,97 @@ public class OfferController {
                 offerCardController.setData(offer);
                 offerCardsVbox1.getChildren().add(view);
                 offerCardController.getInspectOfferButton().setOnAction(event -> openInspectOffer(event, offer));
-                offerCardController.getEditOfferButton().setOnAction(event -> openFormForEdit(event, offer, category));
+                offerCardController.getAcceptOfferButton().setOnAction(event -> {
+                    try {
+                        acceptOffer(event, offer);
+                        resetForm();
+                    } catch (SQLException | IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                });
+                offerCardController.getDenyOfferButton().setOnAction(event -> {
+                    try {
+                        denyOffer(event, offer);
+                        resetForm();
+                    } catch (SQLException | IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                hideButton(offerCardController.getPayUp());
                 hideButton(offerCardController.getEditOfferButton());
+
             } catch (IOException e) {
                 showErrorDialog(e);
             }
+
+        }
+    }
+
+    private void acceptOffer(ActionEvent event, Offer offer) throws SQLException {
+        try {
+            offer.setStatus(3);
+            offerService.update(offer);
+        } catch (SQLException e) {
+            showErrorDialog(e);
+        }
+    }
+    private void denyOffer(ActionEvent event, Offer offer) throws SQLException {
+        try {
+            offer.setStatus(4);
+            offerService.update(offer);
+        } catch (SQLException e) {
+            showErrorDialog(e);
+        }
+    }
+
+    private void pay(Offer offer) throws SQLException {
+        try {
+            // Configure Stripe API key
+            Stripe.apiKey = "sk_test_51OqZ3YLdtRvtorIBI6PHfTH7iGGb64aLqBG7z3jIEGlSmui5sNxJ3mjr8GsKxg3dDFP6L0O9dx5L3PbOwFhrhXRi00LLRcqQUf";
+
+            SessionCreateParams params = SessionCreateParams.builder()
+                    .setMode(SessionCreateParams.Mode.PAYMENT)
+                    .setSuccessUrl("https://127.0.0.1:8000/success-url/" + offer.getId())
+                    .setCancelUrl("https://example.com/cancel")
+                    .addLineItem(
+                            SessionCreateParams.LineItem.builder()
+                                    .setQuantity(1L)
+                                    .setPriceData(
+                                            SessionCreateParams.LineItem.PriceData.builder()
+                                                    .setCurrency("usd")
+                                                    .setUnitAmount(2000L) // Montant en cents (ex. 20,00 USD)
+                                                    .setProductData(
+                                                            SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                                                                    .setName("Sample Product")
+                                                                    .build())
+                                                    .build())
+                                    .build())
+                    .build();
+
+            // Créez la session de paiement
+            Session session = Session.create(params);
+
+            // Mettez à jour l'offre et sauvegardez dans la base de données
+            offer.setStatus(3);
+            offerService.update(offer);
+
+            // Redirigez l'utilisateur vers l'URL de paiement
+            openBrowser(session.getUrl());
+        } catch (Exception e) {
+            throw new SQLException("Erreur lors de la création de la session de paiement", e);
+        }
+    }
+
+    private void openBrowser(String url) {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(new URI(url));
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Desktop is not supported. Please open the following URL manually: " + url);
         }
     }
 
@@ -352,16 +456,17 @@ public class OfferController {
             inspectOfferController.setData(offer, category);
             inspectOfferController.getQuitInspect().setOnAction(this::close_form_button);
 //            if it's an offer i got i can't delete it
-            if(offer.getReciever_id()==SessionManager.getInstance().getUser_id()){
+            if (offer.getReciever_id() == SessionManager.getInstance().getUser_id()) {
                 hideButton(inspectOfferController.getDelete());
 
             }
 //            else don't
             else {
-            inspectOfferController.getDelete().setOnAction(e -> {
-                inspectOfferController.deleteClicked(e);
-                close_form_button(e);
-            });
+                inspectOfferController.getDelete().setOnAction(e -> {
+                    inspectOfferController.deleteClicked(e);
+                    close_form_button(e);
+                });
+                resetForm();
             }
         } catch (IOException | SQLException e) {
             showErrorDialog(e);
@@ -370,15 +475,15 @@ public class OfferController {
 
     private void updateOffer(ActionEvent event, Offer offer, Category category) {
         try {
-            if(category!=null && offer!=null) {
+            if (category != null && offer != null) {
                 category.setAttribute1(Float.parseFloat(categoryAttribute1.getText()));
                 category.setAttribute2(Float.parseFloat(categoryAttribute2.getText()));
                 category.setAttribute3(Float.parseFloat(categoryAttribute3.getText()));
                 category.setTextAttribute(dropdown.getValue());
                 switch (activeButton.getId()) {
                     case "Equity_Button":
-                       category.setType("Equity");
-                       break;
+                        category.setType("Equity");
+                        break;
                     case "Debt_Button":
                         category.setType("Dept");
                         break;
@@ -413,20 +518,10 @@ public class OfferController {
     public void UpdateButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
         if (validateForm()) {
             Category category = this.createCategory();
-            if(category!=null){
+            if (category != null) {
                 saveOffer(category);
             }
             resetForm();
         }
     }
-
-//    public void SubmitButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
-//        if (validateForm()) {
-//            Category category = this.createCategory();
-//            if(category!=null){
-//                saveOffer(category);
-//            }
-//            resetForm();
-//        }
-//    }
 }

@@ -56,11 +56,12 @@ public class OfferService implements IService<Offer> {
 
     @Override
     public void update(Offer offer) throws SQLException {
-        String sql = "UPDATE offer SET    title = ?, description = ?, status = 0 WHERE id = ?";
+        String sql = "UPDATE offer SET    title = ?, description = ?, status = ? WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, offer.getTitle());
             statement.setString(2, offer.getDescription());
-            statement.setInt(3, offer.getId());
+            statement.setInt(3, offer.getStatus());
+            statement.setInt(4, offer.getId());
 
             statement.executeUpdate();
         }
@@ -86,10 +87,12 @@ public class OfferService implements IService<Offer> {
             offer.setId(rs.getInt("id"));
             offer.setTitle(rs.getString("title"));
             offer.setDescription(rs.getString("description"));
+            offer.setStatus(rs.getInt("status"));
             offer.setDate_created(rs.getDate("date_created"));
             offer.setFunding_id(rs.getInt("funding_id"));
             offer.setProject_id(rs.getInt("project_id"));
             offer.setUser_id(rs.getInt("user_id"));
+            offer.setReciever_id(rs.getInt("reciever_id"));
             offers.add(offer);
         }
         return offers;

@@ -76,6 +76,7 @@
                   </Button>
                </children>
             </HBox>
+            <Button fx:id="PayUp" mnemonicParsing="false" onAction="#PayUpButtonClicked" prefHeight="25.0" prefWidth="156.0" styleClass="submit" text="Pay up" textFill="WHITE" />
          </children>
       </HBox>
    </children>
