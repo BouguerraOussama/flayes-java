@@ -1,287 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.Pane?>
 
-<StackPane maxHeight="-Infinity" maxWidth="860.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="860.0" stylesheets="@../../style/projects/Projects.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.offers.OfferController">
-   <children>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-            <Tab text="Invest">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="tab-image">
-                     <image>
-                        <Image url="@../../images/project.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <content>
-                  <ScrollPane hbarPolicy="NEVER" prefHeight="461.0" prefWidth="860.0" stylesheets="@../../style/projects/Projects.css">
-                     <content>
-                        <VBox alignment="TOP_CENTER" prefHeight="485.0" prefWidth="861.0" spacing="10.0" styleClass="scroll-pane">
-                           <padding>
-                              <Insets top="5.0" />
-                           </padding>
-                           <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="861.0" style="-fx-background-color: #9290C3;">
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="156.0" text="Project name" textFill="#070f2b">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                       <padding>
-                                          <Insets left="30.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="156.0" text="Project type" textFill="#070f2b">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="156.0" text="Project status" textFill="#070f2b">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="156.0" text="Date of expritation" textFill="#070f2b">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="156.0" text="Action" textFill="#070f2b">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="-20.0" />
-                                       </padding>
-                                    </Label>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets left="50.0" />
-                                 </padding>
-                              </HBox>
-                              <VBox fx:id="projects_list" alignment="TOP_CENTER" prefHeight="416.0" prefWidth="861.0" spacing="10.0" />
-                           </children>
-                        </VBox>
-                     </content>
-                  </ScrollPane>
-               </content>
-            </Tab>
-          <Tab text="Offers">
-            <content>
-                  <ScrollPane hbarPolicy="NEVER" prefHeight="461.0" prefWidth="860.0" stylesheets="@../../style/projects/Projects.css">
-                     <content>
-                        <VBox alignment="TOP_CENTER" prefHeight="485.0" prefWidth="861.0" spacing="10.0" styleClass="scroll-pane">
-                           <padding>
-                              <Insets top="5.0" />
-                           </padding>
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="55.0" prefWidth="861.0" style="-fx-background-color: #9290C3;">
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="178.0" text="Title" textFill="#070f2b">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="195.0" text="description" textFill="#070f2b">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="163.0" text="status" textFill="#070f2b">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="156.0" text="Action" textFill="#070f2b">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="-100.0" />
-                                       </padding>
-                                       <HBox.margin>
-                                          <Insets left="350.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets left="50.0" />
-                                 </padding>
-                              </HBox>
-                              <VBox fx:id="offerCardsVbox" alignment="TOP_CENTER" prefHeight="416.0" prefWidth="861.0" spacing="10.0" />
-                           </children>
-                        </VBox>
-                     </content>
-                  </ScrollPane>
-            </content>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="tab-image">
-                     <image>
-                        <Image url="@../../images/offer.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-          </Tab>
-        </tabs>
-      </TabPane>
-      <Pane fx:id="blur" opacity="0.36" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" />
-      <Pane fx:id="inspectBg" maxHeight="500.0" maxWidth="500.0" minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-radius: 20;" />
-      <Pane fx:id="form" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="528.0" prefWidth="377.0">
-         <children>
-            <ScrollPane hbarPolicy="NEVER" layoutX="1.0" layoutY="-2.0" prefHeight="528.0" prefWidth="377.0">
-               <content>
-                  <VBox alignment="TOP_CENTER" prefHeight="528.0" prefWidth="377.0" spacing="10.0" style="-fx-background-color: #1B1A55;">
-                     <children>
-                        <Button maxHeight="10.0" maxWidth="10.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#close_form_button" prefHeight="8.0" prefWidth="6.0" style="-fx-background-color: none;">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);">
-                                 <image>
-                                    <Image url="@../../images/close.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Button>
-                        <TextField fx:id="offer_title_tf" maxWidth="350.0" prefHeight="39.0" prefWidth="343.0" promptText="Offer title" />
-                        <HBox fx:id="titleError" prefHeight="12.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="23.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/warning.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label text="Invalid title" textFill="WHITE">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="20.0" left="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <TextArea fx:id="offer_description_ta" maxWidth="350.0" prefHeight="55.0" prefWidth="350.0" promptText="Offer Description" />
-                        <HBox fx:id="descriptionError" prefHeight="12.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="23.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/warning.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label text="Invalid description" textFill="WHITE">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="20.0" left="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <VBox id="category_vbox" alignment="TOP_CENTER" prefHeight="221.0" prefWidth="377.0" stylesheets="@../../style/offers/category.css">
-                           <children>
-                              <Button fx:id="Equity_Button" minHeight="45.0" minWidth="350.0" mnemonicParsing="false" onAction="#Equity_Button_Clicked" styleClass="category" text="Equity Investment" textFill="WHITE">
-                                 <graphic>
-                                    <ImageView fitHeight="32.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);">
-                                       <image>
-                                          <Image url="@../../images/equity.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button fx:id="Debt_Button" minHeight="45.0" minWidth="350.0" mnemonicParsing="false" onAction="#Dept_Button_Clicked" styleClass="category" text="Dept Investment" textFill="WHITE">
-                                 <graphic>
-                                    <ImageView fitHeight="32.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);">
-                                       <image>
-                                          <Image url="@../../images/debt.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <Button fx:id="Revenue_Button" minHeight="45.0" minWidth="350.0" mnemonicParsing="false" onAction="#Revenue_Button_Clicked" styleClass="category" text="Revenue Investment" textFill="WHITE">
-                                 <graphic>
-                                    <ImageView fitHeight="32.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);">
-                                       <image>
-                                          <Image url="@../../images/revenue.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                              <HBox fx:id="typeError" prefHeight="12.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="23.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../images/warning.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <Label text="Invalid type" textFill="WHITE">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                        <VBox id="category_vbox" fx:id="category_form_vbox" alignment="TOP_CENTER" prefHeight="9.0" prefWidth="377.0" spacing="10.0" stylesheets="@../../style/projects/Projects.css" />
-                        <VBox alignment="CENTER">
-                           <children>
-                              <Button fx:id="Submit_button" mnemonicParsing="false" onAction="#SubmitButtonClicked" prefHeight="25.0" prefWidth="79.0" styleClass="submit" text="Submit" textFill="WHITE" />
-                              <Button fx:id="Update_button" mnemonicParsing="false" onAction="#UpdateButtonClicked" prefHeight="25.0" prefWidth="79.0" styleClass="submit" text="Update" textFill="WHITE" />
-                           </children>
-                        </VBox>
-                     </children>
-                     <padding>
-                        <Insets top="30.0" />
-                     </padding>
-                  </VBox>
-               </content>
-            </ScrollPane>
-         </children>
-      </Pane>
-   </children>
+<StackPane maxHeight="-Infinity" maxWidth="860.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="860.0" stylesheets="@../../style/projects/Projects.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.events.AddEvent11">
+    <children>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Invest">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="tab-image">
+                            <image>
+                                <Image url="@../../images/project.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <content>
+                        <ScrollPane hbarPolicy="NEVER" prefHeight="461.0" prefWidth="860.0" stylesheets="@../../style/projects/Projects.css">
+                            <content>
+                                <VBox alignment="TOP_CENTER" prefHeight="485.0" prefWidth="861.0" spacing="10.0" styleClass="scroll-pane">
+                                    <padding>
+                                        <Insets top="5.0" />
+                                    </padding>
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="861.0" style="-fx-background-color: #9290C3;">
+                                            <children>
+                                                <Label alignment="CENTER" prefHeight="28.0" prefWidth="156.0" text="Project name" textFill="#070f2b">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                    <HBox.margin>
+                                                        <Insets left="10.0" />
+                                                    </HBox.margin>
+                                                    <padding>
+                                                        <Insets left="30.0" />
+                                                    </padding>
+                                                </Label>
+                                                <Label alignment="CENTER" prefHeight="28.0" prefWidth="156.0" text="Project type" textFill="#070f2b">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label alignment="CENTER" prefHeight="28.0" prefWidth="156.0" text="Project status" textFill="#070f2b">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label alignment="CENTER" prefHeight="28.0" prefWidth="156.0" text="Date of expiration" textFill="#070f2b">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label alignment="CENTER" prefHeight="28.0" prefWidth="156.0" text="Action" textFill="#070f2b">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="-20.0" />
+                                                    </padding>
+                                                </Label>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets />
+                                            </VBox.margin>
+                                            <padding>
+                                                <Insets left="50.0" />
+                                            </padding>
+                                        </HBox>
+                                        <VBox fx:id="projects_list" alignment="TOP_CENTER" prefHeight="416.0" prefWidth="861.0" spacing="10.0">
+                                            <TableView fx:id="table" layoutX="375.0" layoutY="166.0" prefHeight="238.0" prefWidth="481.0" styleClass="table-view">
+                                                <columns>
+                                                    <TableColumn fx:id="Idcatc" prefWidth="89.0" text="Idcat" />
+                                                    <TableColumn fx:id="namec" prefWidth="78.0" text="Name" />
+                                                    <TableColumn fx:id="datec" prefWidth="100.0" text="Date" />
+                                                    <TableColumn fx:id="descriptionc" prefWidth="96.0" text="Description" />
+                                                    <TableColumn fx:id="locationc" prefWidth="87.0" text="Location" />
+                                                    <TableColumn fx:id="imagec" prefWidth="78.0" text="Image" />
+                                                    <TableColumn fx:id="qrcodec" prefWidth="78.0" text="Qrcode" />
+                                                </columns>
+                                            </TableView>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </ScrollPane>
+                    </content>
+                </Tab>
+                <Tab text="Offers">
+                    <content>
+                        <ScrollPane hbarPolicy="NEVER" prefHeight="461.0" prefWidth="860.0" stylesheets="@../../style/projects/Projects.css">
+                            <content>
+                                <VBox alignment="TOP_CENTER" prefHeight="485.0" prefWidth="861.0" spacing="10.0" styleClass="scroll-pane">
+                                    <padding>
+                                        <Insets top="5.0" />
+                                    </padding>
+                                    <children>
+                                        <HBox alignment="CENTER" prefHeight="55.0" prefWidth="861.0" style="-fx-background-color: #9290C3;">
+                                            <children>
+                                                <Label alignment="CENTER" prefHeight="28.0" prefWidth="178.0" text="Title" textFill="#070f2b">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label alignment="CENTER" prefHeight="28.0" prefWidth="195.0" text="Description" textFill="#070f2b">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label alignment="CENTER" prefHeight="28.0" prefWidth="163.0" text="Status" textFill="#070f2b">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label alignment="CENTER" prefHeight="28.0" prefWidth="156.0" text="Action" textFill="#070f2b">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="-20.0" />
+                                                    </padding>
+                                                </Label>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets />
+                                            </VBox.margin>
+                                            <padding>
+                                                <Insets left="50.0" />
+                                            </padding>
+                                        </HBox>
+                                        <VBox fx:id="offerCardsVbox" alignment="TOP_CENTER" prefHeight="416.0" prefWidth="861.0" spacing="10.0">
+                                            <!-- Placeholder for offer cards -->
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </ScrollPane>
+                    </content>
+                    <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="tab-image">
+                            <image>
+                                <Image url="@../../images/offer.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </StackPane>

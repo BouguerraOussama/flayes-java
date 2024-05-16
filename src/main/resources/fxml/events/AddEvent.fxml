@@ -117,7 +117,7 @@
                         </ImageView>
                         <ImageView fitHeight="97.0" fitWidth="125.0" layoutX="5.0" layoutY="22.0">
                            <image>
-                              <Image url="@../../images/bimoo.gif" />
+                              <Image url="@../../images/event1.gif" />
                            </image>
                         </ImageView>
                      </children></AnchorPane>
