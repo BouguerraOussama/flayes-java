@@ -339,7 +339,7 @@
                         <VBox alignment="CENTER">
                            <children>
                               <Button fx:id="Submit_button" mnemonicParsing="false" onAction="#SubmitButtonClicked" prefHeight="25.0" prefWidth="79.0" styleClass="submit" text="Submit" textFill="WHITE" />
-                              <Button fx:id="Update_button" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" styleClass="submit" text="Update" textFill="WHITE" />
+                              <Button fx:id="Update_button" mnemonicParsing="false" onAction="#UpdateButtonClicked" prefHeight="25.0" prefWidth="79.0" styleClass="submit" text="Update" textFill="WHITE" />
                            </children>
                         </VBox>
                      </children>

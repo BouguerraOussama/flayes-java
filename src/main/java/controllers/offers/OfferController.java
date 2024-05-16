@@ -196,6 +196,7 @@ public class OfferController {
         }
     }
 
+
     private void saveOffer(Category category) {
         try {
             int categoryId = categoryService.create(category);
@@ -256,7 +257,7 @@ public class OfferController {
         categoryAttribute1.setText(String.valueOf(category.getAttribute1()));
         categoryAttribute2.setText(String.valueOf(category.getAttribute2()));
         categoryAttribute3.setText(String.valueOf(category.getAttribute3()));
-//        Update_button.setOnAction(event -> updateOffer(event, offer, category));
+        Update_button.setOnAction(event -> updateOffer(event, offer, category));
     }
 
     public void close_form_button(ActionEvent actionEvent) {
@@ -369,9 +370,30 @@ public class OfferController {
 
     private void updateOffer(ActionEvent event, Offer offer, Category category) {
         try {
-
             if(category!=null && offer!=null) {
-                System.out.println("i'm in");
+                category.setAttribute1(Float.parseFloat(categoryAttribute1.getText()));
+                category.setAttribute2(Float.parseFloat(categoryAttribute2.getText()));
+                category.setAttribute3(Float.parseFloat(categoryAttribute3.getText()));
+                category.setTextAttribute(dropdown.getValue());
+                switch (activeButton.getId()) {
+                    case "Equity_Button":
+                       category.setType("Equity");
+                       break;
+                    case "Debt_Button":
+                        category.setType("Dept");
+                        break;
+                    case "Revenue_Button":
+                        category.setType("Revenue");
+                        break;
+                    default:
+                        category.setType("notSelected");
+                        break;
+                }
+
+                offer.setTitle(offer_title_tf.getText());
+                offer.setDescription(offer_description_ta.getText());
+                offer.setStatus(0);
+
                 categoryService.update(category);
                 offerService.update(offer);
                 resetForm();
@@ -388,8 +410,23 @@ public class OfferController {
         alert.showAndWait();
     }
 
+    public void UpdateButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
+        if (validateForm()) {
+            Category category = this.createCategory();
+            if(category!=null){
+                saveOffer(category);
+            }
+            resetForm();
+        }
+    }
 
-
-
-
+//    public void SubmitButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
+//        if (validateForm()) {
+//            Category category = this.createCategory();
+//            if(category!=null){
+//                saveOffer(category);
+//            }
+//            resetForm();
+//        }
+//    }
 }
