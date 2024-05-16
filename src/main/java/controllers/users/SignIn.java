@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.StageStyle;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
@@ -106,6 +107,8 @@ public class SignIn implements Initializable {
     @FXML
     private HBox emailBox;
     private Connection cnx;
+    private double xOffset = 0;
+    private double yOffset = 0;
     private Statement statement;
     private PreparedStatement prepare;
     private ResultSet result;
@@ -263,11 +266,23 @@ public class SignIn implements Initializable {
 
                 // Create a new stage
                 Stage stage = new Stage();
-
+                stage.initStyle(StageStyle.TRANSPARENT);  // Set the style to TRANSPARENT
 
                 // Set the scene
                 Scene scene = new Scene(root);
+                scene.setFill(Color.TRANSPARENT);  // Ensure the scene is transparent if using TRANSPARENT stage style
                 stage.setScene(scene);
+
+                // Enable dragging for the new stage
+                root.setOnMousePressed(event -> {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                });
+
+                root.setOnMouseDragged(event -> {
+                    stage.setX(event.getScreenX() - xOffset);
+                    stage.setY(event.getScreenY() - yOffset);
+                });
 
                 // Close the current stage
                 Stage currentStage = (Stage) email_signin.getScene().getWindow();
