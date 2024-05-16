@@ -14,7 +14,7 @@ public class RoomService implements IService<Room>{
     public RoomService(){ connection = MyDataBase.getInstance().getConnection(); }
     @Override
     public void create(Room room) throws SQLException {
-        String sql = "INSERT INTO Room (category, sub_category, description) " +
+        String sql = "INSERT INTO Room (catgory, sub_category, description) " +
                 "VALUES ('" + room.getCategory() + "', '" + room.getSub_category() + "', '" +
                 room.getDescription() + "')";
         Statement statement = connection.createStatement();
@@ -23,7 +23,7 @@ public class RoomService implements IService<Room>{
 
     @Override
     public void update(Room room) throws SQLException {
-        String sql = "UPDATE Room SET category = ?, sub_category = ?, description = ? where room_id = ?";
+        String sql = "UPDATE Room SET catgory = ?, sub_category = ?, description = ? where id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, room.getCategory());
         ps.setString(2, room.getSub_category());
@@ -34,7 +34,7 @@ public class RoomService implements IService<Room>{
 
     @Override
     public void delete(int id) throws SQLException {
-        String sql = "DELETE FROM Room WHERE room_id = ?";
+        String sql = "DELETE FROM Room WHERE id = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
@@ -56,8 +56,8 @@ public class RoomService implements IService<Room>{
         List<Room> rooms = new ArrayList<>();
         while (rs.next()){
             Room r = new Room();
-            r.setRoom_id(rs.getInt("room_id"));
-            r.setCategory(rs.getString("category"));
+            r.setRoom_id(rs.getInt("id"));
+            r.setCategory(rs.getString("catgory"));
             r.setSub_category(rs.getString("sub_category"));
             r.setDescription(rs.getString("description"));
 

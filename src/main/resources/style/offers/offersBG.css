@@ -1,3 +1,81 @@
+
+* {
+    -fx-primary : #535C91;
+    -fx-secondary : #1B1A55;
+    -fx-third: #070F2B;
+    -fx-forth: #9290C3;
+}
+.root{
+    -fx-background-radius: 20;
+    -fx-background-color: -fx-secondary;
+}
+/*TablPane styling*/
+
+.tab {
+
+    -fx-background-color : -fx-secondary;
+    -fx-min-width: 50;
+    -fx-pref-height: 60;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 40px;
+    -fx-cursor: hand;
+    -fx-text-base-color: white;
+}
+.tab-image{
+    -fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);
+}
+
+.tab:selected {
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: white;
+}
+.tab:hover {
+    -fx-border-width: 0px 0px 4px 0px;
+    -fx-border-color: white;
+}
+.tab-header-background{
+    -fx-background-radius: 20 20 0 0;
+    -fx-background-color: -fx-secondary;
+}
+.tab-content-bg{
+    -fx-background-color: -fx-secondary;
+    -fx-background-radius:  0 0  20 20;
+}
+#gradiant{
+    -fx-background-color: linear-gradient(to bottom left, -fx-primary, -fx-forth);
+    -fx-background-radius: 20;
+}
+.text-field {
+    -fx-control-inner-background:#070F2B;
+    -fx-effect: dropshadow(gaussian, rgb(84, 113, 231), 10, 0, 0, 1);
+    -fx-border-width:0px 0.5px 0.5px 0px;
+    -fx-prompt-text-fill:#a9afc7;
+    -fx-text-fill: #a9afc7;
+    -fx-font-size: 18;
+}
+.text-field:focused {
+    -fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);
+}
+.text-area{
+    -fx-control-inner-background:#070F2B;
+    -fx-effect: dropshadow(gaussian, rgb(84, 113, 231), 10, 0, 0, 1);
+    -fx-border-width:0px 0.5px 0.5px 0px;
+    -fx-prompt-text-fill:#a9afc7;
+    -fx-text-fill: #a9afc7;
+    -fx-font-size: 18;
+}
+.text-area:focused{
+    -fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);
+}
+.submit{
+    -fx-background-color: #05da54;
+    -fx-effect: dropshadow(gaussian, rgb(73, 241, 136), 10, 0, 0, 1);
+    -fx-background-radius: 30;
+}
+.submit:hover{
+    -fx-effect: dropshadow(gaussian, rgb(255, 255, 255), 10, 0, 0, 1);
+}
+
 .form_pane{
     -fx-background-color:#1B1A55;
     -fx-background-radius: 20px;

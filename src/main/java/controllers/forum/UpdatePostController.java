@@ -10,11 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import models.forum.Post;
 import services.forum.PostService;
-
+import utils.SessionManager;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.Random;
 
 public class UpdatePostController {
 
@@ -22,6 +21,8 @@ public class UpdatePostController {
     public ImageView image;
     private int sqlIdx;
     private int room_id;
+    private int user_id = SessionManager.getInstance().getUser_id();
+
     private Post post;
 
     @FXML
@@ -50,8 +51,9 @@ public class UpdatePostController {
 
 
     @FXML
-    void initialize(int rid){
-        setRoomId(rid);
+    void initialize(int pid, int roomId){
+        setSqlIdx(pid);
+        setRoomId(roomId);
     }
     @FXML
     void upload_img(ActionEvent event) {
@@ -90,7 +92,6 @@ public class UpdatePostController {
 
     @FXML
     public void update(ActionEvent event) {
-        System.out.println(room_id);
         try{
             if (verifyInputIsBlank(authorTF.getText()) == -1 && verifyInputIsBlank(contentTF.getText()) == -1) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -99,16 +100,21 @@ public class UpdatePostController {
                 alert.showAndWait();
                 return;
             }
-            Random random = new Random();
-            System.out.println(sqlIdx);
-            System.out.println(room_id);
-            ps.update(new Post(sqlIdx,room_id,authorTF.getText(),contentTF.getText(),img_path.getText(),random.nextInt(100)));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setContentText("Post Updated");
-            alert.showAndWait();
-            for (TextField textField : Arrays.asList(authorTF, contentTF,img_path)) {
-                textField.setText("");
+                System.out.println(user_id);
+            if (ps.readOne(sqlIdx).getUser_id() == user_id){
+                ps.update(new Post(sqlIdx,room_id,authorTF.getText(),contentTF.getText(),img_path.getText()));
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setContentText("Post Updated");
+                alert.showAndWait();
+                for (TextField textField : Arrays.asList(authorTF, contentTF,img_path)) {
+                    textField.setText("");
+                }
+            }else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Opps..");
+                alert.setContentText("User not authorized for this action !");
+                alert.showAndWait();
             }
         }catch(SQLException ex){
             Alert alert = new Alert(Alert.AlertType.ERROR);
