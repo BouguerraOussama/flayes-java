@@ -3,16 +3,16 @@ package models.offers;
 public class Category {
     private int id;
     private String type;
-    private float attribute1,attribute2,attribute3, score;
+    private float attribute1, attribute2, attribute3, score;
     private String textAttribute;
 
-    public Category(String type, float attribute1, float attribute2, float attribute3,String textAttribute) {
+    public Category(String type, float attribute1, float attribute2, float attribute3, String textAttribute) {
         this.type = type;
         this.attribute1 = attribute1;
         this.attribute2 = attribute2;
         this.attribute3 = attribute3;
         this.textAttribute = textAttribute;
-        this.score=calculateScore();
+        this.score = calculateScore();
     }
 
     public Category(String type, float attribute1, float attribute2, float attribute3) {
@@ -27,7 +27,7 @@ public class Category {
     }
 
     private float calculateScore() {
-        switch (this.type){
+        switch (this.type) {
             case "Equity":
 
                 break;
@@ -82,7 +82,6 @@ public class Category {
     public void setAttribute3(float attribute3) {
         this.attribute3 = attribute3;
     }
-
 
 
     public float getScore() {

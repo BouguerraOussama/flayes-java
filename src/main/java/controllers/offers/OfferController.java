@@ -67,6 +67,7 @@ public class OfferController {
         try {
             loadProjects();
             loadOffersImade();
+            loadOffersIgot();
         } catch (IOException | SQLException e) {
             showErrorDialog(e);
         }
@@ -200,7 +201,6 @@ public class OfferController {
             int categoryId = categoryService.create(category);
             if (categoryId != -1) {
                 offerService.create(new Offer(categoryId, this.project.getId(), SessionManager.getInstance().getUser_id(),project.getUser_id(), offer_title_tf.getText(), offer_description_ta.getText()));
-//                int reciever_id, Date date_created, String title, String description
             }
         } catch (SQLException e) {
             showErrorDialog(e);
@@ -221,6 +221,7 @@ public class OfferController {
         blur.toBack();
         form.toBack();
         loadOffersImade();
+        loadOffersIgot();
     }
 
     public void openForm(ActionEvent actionEvent) {
@@ -255,7 +256,7 @@ public class OfferController {
         categoryAttribute1.setText(String.valueOf(category.getAttribute1()));
         categoryAttribute2.setText(String.valueOf(category.getAttribute2()));
         categoryAttribute3.setText(String.valueOf(category.getAttribute3()));
-        Update_button.setOnAction(event -> updateOffer(event, offer, category));
+//        Update_button.setOnAction(event -> updateOffer(event, offer, category));
     }
 
     public void close_form_button(ActionEvent actionEvent) {
@@ -269,7 +270,7 @@ public class OfferController {
     }
 
     private void loadProjects() throws SQLException, IOException {
-        projects = projectService.read();
+        projects = projectService.readProjectsIdidntMake(SessionManager.getInstance().getUser_id());
         projects_list.getChildren().clear();
         for (Project project : projects) {
             FXMLLoader loader = new FXMLLoader();
@@ -287,8 +288,13 @@ public class OfferController {
         }
     }
 
+    private void hideButton(Button button) {
+        button.setVisible(false);
+        button.setManaged(false);
+    }
+
     private void loadOffersImade() throws SQLException, IOException {
-        List<Offer> offers = offerService.read();
+        List<Offer> offers = offerService.readOffersImade(SessionManager.getInstance().getUser_id());
         offerCardsVbox.getChildren().clear();
         for (Offer offer : offers) {
             Category category = categoryService.getSingleCategory(offer.getFunding_id());
@@ -301,6 +307,28 @@ public class OfferController {
                 offerCardsVbox.getChildren().add(view);
                 offerCardController.getInspectOfferButton().setOnAction(event -> openInspectOffer(event, offer));
                 offerCardController.getEditOfferButton().setOnAction(event -> openFormForEdit(event, offer, category));
+                hideButton(offerCardController.getAcceptOfferButton());
+                hideButton(offerCardController.getDenyOfferButton());
+            } catch (IOException e) {
+                showErrorDialog(e);
+            }
+        }
+    }
+    private void loadOffersIgot() throws SQLException, IOException {
+        List<Offer> offers = offerService.readOffersIgot(SessionManager.getInstance().getUser_id());
+        offerCardsVbox1.getChildren().clear();
+        for (Offer offer : offers) {
+            Category category = categoryService.getSingleCategory(offer.getFunding_id());
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/offers/OfferCard.fxml"));
+            try {
+                Pane view = loader.load();
+                OfferCardController offerCardController = loader.getController();
+                offerCardController.setData(offer);
+                offerCardsVbox1.getChildren().add(view);
+                offerCardController.getInspectOfferButton().setOnAction(event -> openInspectOffer(event, offer));
+                offerCardController.getEditOfferButton().setOnAction(event -> openFormForEdit(event, offer, category));
+                hideButton(offerCardController.getEditOfferButton());
             } catch (IOException e) {
                 showErrorDialog(e);
             }
@@ -308,6 +336,7 @@ public class OfferController {
     }
 
     private void openInspectOffer(ActionEvent event, Offer offer) {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/offers/InspectOffer.fxml"));
         try {
@@ -321,25 +350,35 @@ public class OfferController {
             InspectOfferController inspectOfferController = loader.getController();
             inspectOfferController.setData(offer, category);
             inspectOfferController.getQuitInspect().setOnAction(this::close_form_button);
+//            if it's an offer i got i can't delete it
+            if(offer.getReciever_id()==SessionManager.getInstance().getUser_id()){
+                hideButton(inspectOfferController.getDelete());
+
+            }
+//            else don't
+            else {
             inspectOfferController.getDelete().setOnAction(e -> {
                 inspectOfferController.deleteClicked(e);
                 close_form_button(e);
             });
+            }
         } catch (IOException | SQLException e) {
             showErrorDialog(e);
         }
     }
 
     private void updateOffer(ActionEvent event, Offer offer, Category category) {
-//        try {
-//            int categoryId = categoryService.update(category);
-//            if (categoryId != -1) {
-//                offerService.update(new Offer(categoryId, offerTitleTextField.getText(), offerDescriptionTextArea.getText(), projectId));
-//                resetForm();
-//            }
-//        } catch (SQLException | IOException e) {
-//            showErrorDialog(e);
-//        }
+        try {
+
+            if(category!=null && offer!=null) {
+                System.out.println("i'm in");
+                categoryService.update(category);
+                offerService.update(offer);
+                resetForm();
+            }
+        } catch (SQLException | IOException e) {
+            showErrorDialog(e);
+        }
     }
 
     private void showErrorDialog(Exception e) {
@@ -350,8 +389,7 @@ public class OfferController {
     }
 
 
-    public void UpdateButtonClicked(ActionEvent actionEvent) {
-    }
+
 
 
 }

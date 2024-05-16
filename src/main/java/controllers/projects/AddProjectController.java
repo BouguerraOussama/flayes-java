@@ -12,96 +12,119 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import models.projects.Project;
 import services.projects.ProjectService;
+import utils.SessionManager;
 
-import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddProjectController {
-    /**services**/
-    ProjectService projectService = new ProjectService();
-    public Button SubmitbuttonClicked;
-    public HBox typeError;
-    public TextField projectTypeTF;
-    public HBox descriptionError;
-    public TextArea projectDescriptionTA;
-    public HBox titleError;
-    public TextField projectNameTF;
-    public VBox projectCardsVbox;
-    List<Project> projects = new ArrayList<>();
+
+    private final ProjectService projectService = new ProjectService();
+    private final List<Project> projects = new ArrayList<>();
+
+    @FXML
+    private Button Submitbutton;
+    @FXML
+    private HBox titleError, descriptionError, typeError;
+    @FXML
+    private TextField projectNameTF, projectTypeTF;
+    @FXML
+    private TextArea projectDescriptionTA;
+    @FXML
+    private VBox projectCardsVbox;
 
     @FXML
     void initialize() {
+        hideErrorMessages();
+        try {
+            loadProjects();
+        } catch (IOException | SQLException e) {
+            showErrorDialog("Error initializing projects", e.getMessage());
+        }
+    }
+
+    @FXML
+    private void SubmitbuttonClicked(ActionEvent actionEvent) {
+        if (validateForm()) {
+            try {
+                projectService.create(new Project(
+                        projectNameTF.getText(),
+                        projectDescriptionTA.getText(),
+                        projectTypeTF.getText(),
+                        0, 0, SessionManager.getInstance().getUser_id()
+                ));
+                loadProjects();
+                showInfoDialog("Success", "Project added successfully");
+                clearForm();
+            } catch (SQLException | IOException e) {
+                showErrorDialog("Error adding project", e.getMessage());
+            }
+        }
+    }
+
+    private void loadProjects() throws SQLException, IOException {
+        projects.clear();
+        projects.addAll(projectService.read());
+        projectCardsVbox.getChildren().clear();
+        for (Project project : projects) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/projects/ProjectCard.fxml"));
+            Pane projectCard = loader.load();
+            ProjectCardController projectCardController = loader.getController();
+            projectCardController.setData(project);
+            projectCardsVbox.getChildren().add(projectCard);
+        }
+    }
+
+    private boolean validateForm() {
+        boolean valid = true;
+        if (projectNameTF.getText().isEmpty()) {
+            titleError.setVisible(true);
+            valid = false;
+        } else {
+            titleError.setVisible(false);
+        }
+        if (projectDescriptionTA.getText().isEmpty()) {
+            descriptionError.setVisible(true);
+            valid = false;
+        } else {
+            descriptionError.setVisible(false);
+        }
+        if (projectTypeTF.getText().isEmpty()) {
+            typeError.setVisible(true);
+            valid = false;
+        } else {
+            typeError.setVisible(false);
+        }
+        return valid;
+    }
+
+    private void hideErrorMessages() {
         titleError.setVisible(false);
         descriptionError.setVisible(false);
         typeError.setVisible(false);
-
-        try{
-            loadingProjects();
-        }catch (IOException  | SQLException e) {
-            throw new RuntimeException(e);
-        }
-
     }
 
-
-    public Button getSubmitbuttonClicked() {
-        return SubmitbuttonClicked;
+    private void clearForm() {
+        projectNameTF.clear();
+        projectDescriptionTA.clear();
+        projectTypeTF.clear();
+        hideErrorMessages();
     }
 
-    public ProjectService getProjectService() {
-        return projectService;
+    private void showInfoDialog(String title, String content) {
+        showAlert(Alert.AlertType.INFORMATION, title, content);
     }
 
-    public void SubmitbuttonClicked(ActionEvent actionEvent){
-
-        /*check text fields are empty*/
-        titleError.setVisible(projectNameTF.getText().isEmpty());
-        descriptionError.setVisible(projectDescriptionTA.getText().isEmpty());
-        typeError.setVisible(projectTypeTF.getText().isEmpty());
-
-        // If any error labels are visible, do not proceed with submission
-        if (titleError.isVisible() || descriptionError.isVisible() || typeError.isVisible()) {
-            return;
-        }
-        //proceeding to submission of the form to data base
-        try{
-
-            projectService.create(new Project(projectNameTF.getText(), projectDescriptionTA.getText(), projectTypeTF.getText(), 0, 0));
-
-            loadingProjects();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setContentText("project added successfully");
-            alert.showAndWait();
-            projectNameTF.setText("");
-            projectDescriptionTA.setText("");
-            projectTypeTF.setText("");
-        } catch (SQLException | IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
-        }
+    private void showErrorDialog(String title, String content) {
+        showAlert(Alert.AlertType.ERROR, title, content);
     }
 
-    private void loadingProjects() throws SQLException, IOException {
-        projects = projectService.read();
-        projectCardsVbox.getChildren().clear();
-        for (Project project:projects)
-        {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/projects/ProjectCard.fxml"));
-
-            Pane view = loader.load();
-            ProjectCardController projectCardController = loader.getController();
-            projectCardController.setData(project);
-
-            projectCardsVbox.getChildren().add(view);
-
-        }
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
-
 }

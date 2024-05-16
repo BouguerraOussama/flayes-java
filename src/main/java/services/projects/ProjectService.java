@@ -16,7 +16,7 @@ public class ProjectService implements IService<Project> {
     @Override
     public int create(Project project) throws SQLException {
 
-        String query = "insert into project(name,description,type,status,added_date,end_date,user_status) values (?,?,?,?,?,?,?)";
+        String query = "insert into project(name,description,type,status,added_date,end_date,user_status,user_id) values (?,?,?,?,?,?,?,?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, project.getName());
             ps.setString(2, project.getDescription());
@@ -25,6 +25,7 @@ public class ProjectService implements IService<Project> {
             ps.setTimestamp(5, currentTimestamp);
             ps.setTimestamp(6, Timestamp.valueOf(currentTimestamp.toLocalDateTime().plusDays(10)));
             ps.setInt(7, project.getUser_status());
+            ps.setInt(8, project.getUser_id());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
@@ -62,6 +63,31 @@ public class ProjectService implements IService<Project> {
             p.setUser_status(rs.getInt("user_status"));
             projects.add(p);
         }
+        return projects;
+    }
+    public List<Project> readProjectsIdidntMake(int user_id) throws SQLException {
+        String sql = "SELECT * FROM project WHERE user_id != ?";
+        List<Project> projects = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, user_id);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    Project p = new Project();
+                    p.setId(rs.getInt("id"));
+                    p.setName(rs.getString("name"));
+                    p.setUser_id(rs.getInt("user_id"));
+                    p.setDescription(rs.getString("description"));
+                    p.setType(rs.getString("type"));
+                    p.setAdmin_status(rs.getInt("status"));
+                    p.setAdded_date(rs.getDate("added_date"));
+                    p.setEnd_date(rs.getDate("end_date"));
+                    p.setUser_status(rs.getInt("user_status"));
+                    projects.add(p);
+                }
+            }
+        }
+
         return projects;
     }
 }

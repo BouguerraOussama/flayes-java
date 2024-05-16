@@ -10,12 +10,13 @@ public class Project {
     private int admin_status , user_status;
     private Date added_date,end_date;
 
-    public Project(String name, String description, String type, int admin_status, int user_status) {
+    public Project(String name, String description, String type, int admin_status, int user_status , int user_id) {
         this.name = name;
         this.description = description;
         this.type = type;
         this.admin_status = admin_status;
         this.user_status = user_status;
+        this.user_id=user_id;
     }
 
     public Project() {
