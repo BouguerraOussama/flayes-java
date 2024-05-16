@@ -6,7 +6,9 @@
 package controllers.users;
 
 import controllers.users.animations.Animations;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,12 +23,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import models.users.User;
 import services.users.Notifications;
 import services.users.TrayNotification;
 import services.users.UserService;
 import utils.MyDataBase;
 import utils.SessionManager;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.mail.*;
 import javax.mail.Message.RecipientType;
@@ -40,12 +44,17 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.*;
+import org.mindrot.jbcrypt.BCrypt;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.fxml.FXML;
+import javafx.scene.layout.HBox;
 public class SignIn implements Initializable {
     @FXML
     private Label TravelMe;
@@ -59,6 +68,8 @@ public class SignIn implements Initializable {
     private Hyperlink create_acc;
     @FXML
     private Label TravelMe2;
+    @FXML
+    private Label your_email;
 
     @FXML
     private TextField username;   //textfielusername
@@ -92,6 +103,8 @@ public class SignIn implements Initializable {
 
     @FXML
     private Hyperlink mdp_oub;
+    @FXML
+    private HBox emailBox;
     private Connection cnx;
     private Statement statement;
     private PreparedStatement prepare;
@@ -100,6 +113,8 @@ public class SignIn implements Initializable {
     private static SessionManager instance;
     public SignIn() {
     }
+
+
 
     public void exit() {
         System.exit(0);
@@ -118,6 +133,7 @@ public class SignIn implements Initializable {
 
     public void textfieldDesign1() {
         if (this.email_signup.isFocused()) {
+
             this.email_signup.setStyle("-fx-background-color:#fff;-fx-border-width:2px");
             this.password_signup.setStyle("-fx-background-color:transparent;-fx-border-width:1px");
             this.username.setStyle("-fx-background-color:transparent;-fx-border-width:1px");
@@ -210,6 +226,15 @@ public class SignIn implements Initializable {
         }
     }
 
+
+
+    private void showAlert(AlertType alertType, String title, String header, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
     public void login() {
         try {
             //User user = userService.login(email_signin.getText(), password_signin.getText());
@@ -222,7 +247,7 @@ public class SignIn implements Initializable {
                 String fxmlPath = null;
                 switch (user.getRole()) {
                     case "ROLE_ADMIN":
-                        fxmlPath = "/Main.fxml";
+                        fxmlPath = "/Back.fxml";
                         break;
                     case "ROLE_USER":
                         fxmlPath = "/Front.fxml";
@@ -238,7 +263,7 @@ public class SignIn implements Initializable {
 
                 // Create a new stage
                 Stage stage = new Stage();
-                stage.setTitle("Your Title"); // Set your title here
+
 
                 // Set the scene
                 Scene scene = new Scene(root);
@@ -271,18 +296,10 @@ public class SignIn implements Initializable {
     }
 
 
-    private void showAlert(AlertType alertType, String title, String header, String content) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
-
-
     @FXML
     public void signUp() {
         this.cnx = MyDataBase.getInstance().getConnection();
+        String userEmail = email_signup.getText();
         String query = "insert into user (name,email,tel,password,roles,image_name,status) values (?,?,?,?,'ROLE_USER',?,?)";
 
         try {
@@ -295,22 +312,29 @@ public class SignIn implements Initializable {
                 alert.showAndWait();
             } else if (this.confirm_password.getText().length() < 8 | this.confirm_password.getText() == this.password_signup.getText()) {
                 alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Travel Me :: Error Message");
+                alert.setTitle("Flayes&Flayes :: Error Message");
                 alert.setHeaderText((String) null);
-                alert.setContentText("Password doit etre sup 8 caractéres !!");
+                alert.setContentText("password has to have 8 characters !!");
                 alert.showAndWait();
+            }else if (userService.emailExists(userEmail)) {
+                email_signup.getStyleClass().add("text-field-error");
+                showAlert(Alert.AlertType.ERROR, "Error", null, "A user with this email already exists.");
+
             } else if (this.ValidationEmail()) {
+                // Hash the password before inserting
+                String hashedPassword = BCrypt.hashpw(this.password_signup.getText(), BCrypt.gensalt());
+
                 PreparedStatement smt = this.cnx.prepareStatement(query);
                 smt.setString(1, this.username.getText());
                 smt.setString(2, this.email_signup.getText());
                 smt.setString(3, this.numero.getText());
-                smt.setString(4, this.password_signup.getText());
+                smt.setString(4, hashedPassword);
                 smt.setString(5, myFile.getText());
                 smt.setInt(6, 0);
                 smt.executeUpdate();
                 System.out.println("ajout avec succee");
                 Alert alertt = new Alert(AlertType.INFORMATION);
-                alertt.setTitle("Travel Me :: BIENVENNUE");
+                alertt.setTitle("Flayes&Flayes :: welcome");
                 alertt.setHeaderText((String) null);
                 alertt.setContentText("Vous Etes Inscrit !!");
                 TrayNotification trayNotification = new TrayNotification();
@@ -442,7 +466,7 @@ public class SignIn implements Initializable {
                 image.setImage(img);
                 image.setVisible(true);
                 //Déplacer l'image
-                String newPath = "C:\\Users\\user\\Desktop\\User\\src\\main\\resources\\users\\";
+                String newPath = "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\";
                 File sourceFile = null;
                 File destinationFile = null;
                 String nFile = f.getName();
@@ -477,5 +501,53 @@ public class SignIn implements Initializable {
 
      */
 
+
+
+
+
+    public void openForgetPasswordPage(ActionEvent event) {
+        try {
+            // Load the forgetpassword.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/users/forgetpassword.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+
+
+            // Set the scene
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            // Close the current stage
+            Stage currentStage = (Stage) mdp_oub.getScene().getWindow();
+            currentStage.close();
+
+            // Show the new stage
+            stage.show();
+        } catch (IOException e) {
+            // Handle the exception if the fxml file cannot be loaded
+            e.printStackTrace(); // You may want to handle this more gracefully
+        }
+    }
+
+    public static class SceneTransition {
+        public static void fadeTransition(Scene scene, Stage stage) {
+            // Create a fade transition with a duration of 1.5 seconds
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0), scene.getRoot());
+
+            // Set the from value (fully transparent)
+            fadeTransition.setFromValue(0.0);
+
+            // Set the to value (fully opaque)
+            fadeTransition.setToValue(1.0);
+
+            // Set action on finished transition
+            fadeTransition.setOnFinished(event -> stage.show());
+
+            // Play the fade transition
+            fadeTransition.play();
+        }
+    }
 }
 

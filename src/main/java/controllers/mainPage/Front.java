@@ -48,6 +48,8 @@ private Button btn_drop;
     @FXML
     private ImageView imageView;
     @FXML
+    private ImageView imageVieww;
+    @FXML
     private AnchorPane MainPageController;
     @FXML
     private Button btn_user;
@@ -65,8 +67,8 @@ private Button btn_drop;
        // user = us.getUserConnected();
         user=us.getUserById(SessionManager.getInstance().getUser_id());
         // Get the user and load the image
-        String imagePath = "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-\\src\\main\\resources\\images\\";
-        String imageFileName = "femme.png";
+        String imagePath =  "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" ;
+        String imageFileName = user.getImage_name();
         String completeFilePath = imagePath + imageFileName;
         File file = new File(completeFilePath);
         Image image = new Image(file.toURI().toString());
@@ -76,14 +78,16 @@ private Button btn_drop;
         imageView.setFitWidth(50.0);
         imageView.setPreserveRatio(true);
         imageView.setPickOnBounds(true);
+
+
     }
 
     @FXML
     void HomeButtonClicked(ActionEvent actionEvent) {
         setActive(btn_home);
         // Get the user and load the image
-        String imagePath = "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-\\src\\main\\resources\\images\\";
-        String imageFileName = "femme.png";
+        String imagePath =  "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" ;
+        String imageFileName = user.getImage_name();
         String completeFilePath = imagePath + imageFileName;
         File file = new File(completeFilePath);
         Image image = new Image(file.toURI().toString());
@@ -93,6 +97,12 @@ private Button btn_drop;
         imageView.setFitWidth(50.0);
         imageView.setPreserveRatio(true);
         imageView.setPickOnBounds(true);
+
+        imageVieww.setImage(image);
+        imageVieww.setFitHeight(50.0);
+        imageVieww.setFitWidth(45.0);
+        imageVieww.setPreserveRatio(true);
+        imageVieww.setPickOnBounds(true);
     }
 
     @FXML
@@ -162,7 +172,7 @@ private Button btn_drop;
             //user = us.getUserConnected();
             user=us.getUserById(SessionManager.getInstance().getUser_id());
             // Get the user and load the image
-            String imagePath = "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-\\src\\main\\resources\\images\\";
+            String imagePath =  "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" ;
             String imageFileName = user.getImage_name();
             String completeFilePath = imagePath + imageFileName;
             File file = new File(completeFilePath);

@@ -54,7 +54,7 @@ public class ReclamationService {
                 ps.setString(2, t.getObjet());
                 ps.setString(3, t.getTypeR());
                 ps.setString(4, t.getDescriptionR());
-                ps.setString(5, "Non traité");
+                ps.setString(5, "Not Treated");
 
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected > 0) {
@@ -173,7 +173,7 @@ public class ReclamationService {
             try {
                 String req = "update reclamation set etat=? where id_rec= ?";
                 PreparedStatement ps = this.cnx.prepareStatement(req);
-                ps.setString(1, "traité");
+                ps.setString(1, "Treated");
                 ps.setInt(2, (int) t.getId_rec());
                 ps.executeUpdate();
                 System.out.println("Reclamation modifiée");

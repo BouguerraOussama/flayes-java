@@ -16,7 +16,7 @@ public class Main extends Application {
     private double yOffset = 0;
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/users/SignIn.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/users/register.fxml")));
         primaryStage.setTitle("Flayes&Flayes");
 
         primaryStage.initStyle(StageStyle.TRANSPARENT);

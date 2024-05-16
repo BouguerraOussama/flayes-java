@@ -114,7 +114,7 @@ public class AddUser implements Initializable {
                 image.setImage(img);
                 image.setVisible(true);
                 //Déplacer l'image
-                String newPath = "C:\\Users\\user\\Desktop\\User\\src\\main\\resources\\users\\";
+                String newPath = "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" ;
                 File sourceFile = null;
                 File destinationFile = null;
                 String nFile = f.getName();

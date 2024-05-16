@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.users.SignIn">
+    <children>
+        <AnchorPane fx:id="login_form" prefHeight="500.0" prefWidth="394.0">
+            <children>
+
+                <AnchorPane layoutX="0.0" layoutY="00.0" prefHeight="770.0" prefWidth="600.0" styleClass="login-bg" stylesheets="/style/users/design.css">
+                    <children>
+                        <ImageView fitWidth="600.0" fitHeight="760.0">
+                            <image>
+                                <Image url="/images/account-bg.jpg" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="TravelMe" >
+
+                        </Label>
+                        <ImageView fitWidth="500" fitHeight="200" layoutX="20.0" layoutY="250.0">
+                            <image>
+                                <Image url="@/images/logo.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="700.0" prefHeight="586.0" prefWidth="471.0">
+                    <children>
+                        <Button layoutX="408.0" layoutY="9.0" mnemonicParsing="false" onAction="#exit" prefHeight="17.0" prefWidth="46.0" styleClass="exit" stylesheets="/style/users/design.css" text="X" AnchorPane.leftAnchor="408.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="9.0">
+                            <graphic>
+                            </graphic>
+                        </Button>
+                        <Label layoutX="70.0" layoutY="155.0" prefHeight="54.0" prefWidth="500.0" text="Welcome To Flayes" style="-fx-font-weight: bold; -fx-text-fill: #33406a; -fx-font-family: 'Ubuntu', sans-serif; -fx-font-size: 30px;" >
+                        </Label>
+
+                        <StackPane layoutX="112.0" layoutY="240.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+                            <HBox spacing="5" alignment="CENTER_LEFT">
+                                <ImageView fitWidth="24" fitHeight="24">
+                                    <Image url="@/images/env.png" />
+                                </ImageView>
+                                <Label text="Your Email" style="-fx-font-size: 18px; -fx-font-weight: 600; -fx-font-family: 'Ubuntu', sans-serif; -fx-text-fill: #33406a;" />
+                            </HBox>
+                        </StackPane>
+
+                        <TextField fx:id="email_signin" layoutX="112.0" layoutY="280.0" onMouseClicked="#textfieldDesign" onMouseDragged="#textfieldDesign" prefHeight="28.0" prefWidth="220.0" promptText="Enter Your Email" styleClass="textfield-design" stylesheets="/style/users/design.css">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </TextField>
+                        <StackPane layoutX="112.0" layoutY="330.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+                            <HBox spacing="5" alignment="CENTER_LEFT">
+                                <ImageView fitWidth="24" fitHeight="24">
+                                    <Image url="@/images/lock.png" />
+                                </ImageView>
+                                <Label text="Your Password" style="-fx-font-size: 18px; -fx-font-weight: 600; -fx-font-family: 'Ubuntu', sans-serif; -fx-text-fill: #33406a;" />
+                            </HBox>
+                        </StackPane>
+                        <PasswordField fx:id="password_signin" layoutX="112.0" layoutY="370.0" onMouseClicked="#textfieldDesign" onMouseDragged="#textfieldDesign" prefHeight="28.0" prefWidth="220.0" promptText="Enter your Password" styleClass="textfield-design" stylesheets="/style/users/design.css">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </PasswordField>
+                        <Button fx:id="login_btn" layoutX="150.0" layoutY="535.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="150.0"   text="Sign In" textFill="WHITE" style="-fx-border-width: 0; -fx-background-radius: 10px; -fx-background-color: linear-gradient(#e2906e, #e83a99); -fx-effect: dropshadow(gaussian, rgba(232, 58, 153, 0.5), 2.419, 0.52, 0, 9.703); -fx-padding: 0 45px; -fx-text-fill: #ffffff; -fx-margin-top: 20px;" >
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                        <StackPane layoutX="60.0" layoutY="460.0">
+                    <children>
+                        <!-- Use an HBox to align the label and Hyperlink horizontally -->
+                        <HBox spacing="5">
+                        <!-- Add the label with the text "Forgot your password?" -->
+                        <Label text="Already have an account ?" style="-fx-font-size: 15px; -fx-font-weight: 600; -fx-text-fill: #0403c4; -fx-text-transform: capitalize;" />
+                        <!-- Add the Hyperlink -->
+                        <Hyperlink fx:id="create_acc" layoutX="144.0" layoutY="448.0" onAction="#changeForm" styleClass="hypertext-design" stylesheets="/style/users/design.css" text="Create new account ?">
+                            <font>
+                                <Font name="Microsoft Sans Serif" size="15.0" />
+                            </font>
+                        </Hyperlink>
+                        </HBox>
+                    </children>
+                        </StackPane>
+
+                        <StackPane layoutX="70.0" layoutY="430.0">
+                            <children>
+                                <!-- Use an HBox to align the label and Hyperlink horizontally -->
+                                <HBox spacing="5">
+                                    <!-- Add the label with the text "Forgot your password?" -->
+                                    <Label text="Forgot your password?" style="-fx-font-size: 15px; -fx-font-weight: 600; -fx-text-fill: #0403c4; -fx-text-transform: capitalize;" />
+                                    <!-- Add the Hyperlink -->
+                                    <Hyperlink fx:id="mdp_oub" onAction="#openForgetPasswordPage" styleClass="hypertext-design" stylesheets="/style/users/design.css" text="Recover Password">
+                                        <font>
+                                            <Font name="Microsoft Sans Serif" size="15.0" />
+                                        </font>
+                                    </Hyperlink>
+                                </HBox>
+                            </children>
+                        </StackPane>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+
+
+
+
+
+
+
+
+
+
+        <AnchorPane fx:id="signup_form" layoutX="10.0" layoutY="10.0" prefHeight="-Infinity" prefWidth="-Infinity" visible="false">
+            <children>
+                <AnchorPane layoutX="620.0" layoutY="-10.0" prefHeight="770.0" prefWidth="600.0" styleClass="login-bg" stylesheets="/style/users/design.css">
+                    <children>
+                        <ImageView fitWidth="600.0" fitHeight="760.0">
+                            <image>
+                                <Image url="/images/account-bg.jpg" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="TravelMe2" >
+
+                        </Label>
+                        <ImageView fitWidth="500" fitHeight="200" layoutX="20.0" layoutY="250.0">
+                            <image>
+                                <Image url="@/images/logo.png" />
+                            </image>
+                        </ImageView>
+                        <Button layoutX="408.0" layoutY="9.0" mnemonicParsing="false" onAction="#exit" prefHeight="17.0" prefWidth="46.0" styleClass="exit" stylesheets="/style/users/design.css" text="X" AnchorPane.leftAnchor="408.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="9.0">
+                            <graphic>
+                            </graphic>
+                        </Button>
+
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="-10.0" prefHeight="500.0" prefWidth="400.0">
+                    <children>
+                        <Label layoutX="120.0" layoutY="90.0" prefHeight="54.0" prefWidth="300.0" text="Let's get started" style="-fx-font-weight: bold; -fx-text-fill: #33406a; -fx-font-family: 'Ubuntu', sans-serif; -fx-font-size: 30px;">
+                            <font>
+                                <Font name="Berlin Sans FB" size="39.0" />
+                            </font>
+                        </Label>
+
+                        <Button fx:id="signup_btn" layoutX="159.0" layoutY="600.0" mnemonicParsing="false" onAction="#signUp" prefHeight="40.0" prefWidth="150.0"  text="SignUp" textFill="WHITE" style="-fx-border-width: 0; -fx-background-radius: 10px; -fx-background-color: linear-gradient(#e2906e, #e83a99); -fx-effect: dropshadow(gaussian, rgba(232, 58, 153, 0.5), 2.419, 0.52, 0, 9.703); -fx-padding: 0 45px; -fx-text-fill: #ffffff; -fx-margin-top: 20px;">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+
+
+                        <StackPane layoutX="100.0" layoutY="660.0">
+                            <children>
+                                <!-- Use an HBox to align the label and Hyperlink horizontally -->
+                                <HBox spacing="5">
+                                    <!-- Add the label with the text "Forgot your password?" -->
+                                    <Label text="Already have an account ?" style="-fx-font-size: 15px; -fx-font-weight: 600; -fx-text-fill: #0403c4; -fx-text-transform: capitalize;" />
+                                    <!-- Add the Hyperlink -->
+                                    <Hyperlink fx:id="login_acc" layoutX="144.0" layoutY="640.0" onAction="#changeForm" styleClass="hypertext-design" stylesheets="/style/users/design.css" text="Sign In ?">
+                                        <font>
+                                            <Font name="Microsoft Sans Serif" size="15.0" />
+                                        </font>
+                                    </Hyperlink>
+                                </HBox>
+                            </children>
+                        </StackPane>
+
+
+
+
+                        <StackPane layoutX="112.0" layoutY="440.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+                            <HBox spacing="5" alignment="CENTER_LEFT">
+                                <ImageView fitWidth="24" fitHeight="24">
+                                    <Image url="@/images/lock.png" />
+                                </ImageView>
+                                <Label text="Repeat Password" style="-fx-font-size: 18px; -fx-font-weight: 600; -fx-font-family: 'Ubuntu', sans-serif; -fx-text-fill: #33406a;" />
+                            </HBox>
+                        </StackPane>
+                        <PasswordField fx:id="confirm_password" layoutX="112.0" layoutY="470.0" onKeyTyped="#textfieldDesign1" onMouseClicked="#textfieldDesign1" onMouseDragged="#textfieldDesign1" prefHeight="28.0" prefWidth="220.0" promptText="Confirm password ..." styleClass="textfield-design" stylesheets="/style/users/design.css">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </PasswordField>
+
+
+                        <StackPane layoutX="112.0" layoutY="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+                            <HBox spacing="5" alignment="CENTER_LEFT">
+                                <ImageView fitWidth="24" fitHeight="24">
+                                    <Image url="@/images/Phone.png" />
+                                </ImageView>
+                                <Label text="Your Phone" style="-fx-font-size: 18px; -fx-font-weight: 600; -fx-font-family: 'Ubuntu', sans-serif; -fx-text-fill: #33406a;" />
+                            </HBox>
+                        </StackPane>
+                        <TextField fx:id="numero" layoutX="112.0" layoutY="330.0" onKeyTyped="#textfieldDesign1" onMouseClicked="#textfieldDesign1" onMouseDragged="#textfieldDesign1" prefHeight="28.0" prefWidth="220.0" promptText="Numero ..." styleClass="textfield-design" stylesheets="/style/users/design.css">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </TextField>
+
+
+
+                        <StackPane layoutX="112.0" layoutY="370.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+                            <HBox spacing="5" alignment="CENTER_LEFT">
+                                <ImageView fitWidth="24" fitHeight="24">
+                                    <Image url="@/images/lock.png" />
+                                </ImageView>
+                                <Label text="Your Password" style="-fx-font-size: 18px; -fx-font-weight: 600; -fx-font-family: 'Ubuntu', sans-serif; -fx-text-fill: #33406a;" />
+                            </HBox>
+                        </StackPane>
+                        <PasswordField fx:id="password_signup" layoutX="112.0" layoutY="400.0" onKeyTyped="#textfieldDesign1" onMouseClicked="#textfieldDesign1" onMouseDragged="#textfieldDesign1" prefHeight="28.0" prefWidth="220.0" promptText="Password ..." styleClass="textfield-design" stylesheets="/style/users/design.css">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </PasswordField>
+
+
+
+                        <StackPane layoutX="112.0" layoutY="510.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+                            <HBox spacing="5" alignment="CENTER_LEFT">
+                                <ImageView fitWidth="24" fitHeight="24">
+                                    <Image url="@/images/profil.png" />
+                                </ImageView>
+                                <Label text="Your Profil Image" style="-fx-font-size: 18px; -fx-font-weight: 600; -fx-font-family: 'Ubuntu', sans-serif; -fx-text-fill: #33406a;" />
+                            </HBox>
+                        </StackPane>
+                        <ImageView fx:id="image" fitHeight="112.0" fitWidth="114.0" layoutX="400.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button fx:id="choisirfichier" layoutX="112.0" layoutY="540.0" mnemonicParsing="false" onAction="#onChoisi" prefHeight="28.0" prefWidth="220.0" text="choose File">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                            <Label fx:id="nom_fichier" layoutX="150.0" layoutY="540.0" text="Label">
+                                <font>
+                                    <Font size="1.0" />
+                                </font>
+                            </Label>
+                            <Label fx:id="myFile" layoutX="150.0" layoutY="530.0" text="Label">
+                                <font>
+                                    <Font size="1.0" />
+                                </font>
+                            </Label>
+                        </Button>
+
+
+
+                        <StackPane layoutX="112.0" layoutY="230.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+                            <HBox spacing="5" alignment="CENTER_LEFT">
+                                <ImageView fitWidth="24" fitHeight="24">
+                                    <Image url="@/images/env.png" />
+                                </ImageView>
+                                <Label text="Your Email" style="-fx-font-size: 18px; -fx-font-weight: 600; -fx-font-family: 'Ubuntu', sans-serif; -fx-text-fill: #33406a;" />
+                            </HBox>
+                        </StackPane>
+
+                        <TextField fx:id="email_signup" layoutX="112.0" layoutY="260.0" onKeyTyped="#textfieldDesign1" onMouseClicked="#textfieldDesign1" onMouseDragged="#textfieldDesign1" prefHeight="28.0" prefWidth="220.0" promptText="Email ..." styleClass="textfield-design" stylesheets="/style/users/design.css">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </TextField>
+
+
+
+
+
+                        <TextField fx:id="username" layoutX="112.0" layoutY="190.0" onKeyTyped="#textfieldDesign1" onMouseClicked="#textfieldDesign1" onMouseDragged="#textfieldDesign1" prefHeight="28.0" prefWidth="220.0" promptText="Username ..." styleClass="textfield-design" stylesheets="/style/users/design.css">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </TextField>
+
+                        <StackPane layoutX="112.0" layoutY="160.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+                            <HBox spacing="5" alignment="CENTER_LEFT">
+                                <ImageView fitWidth="24" fitHeight="24">
+                                    <Image url="@/images/usr.png" />
+                                </ImageView>
+                                <Label text="Your Name" style="-fx-font-size: 18px; -fx-font-weight: 600; -fx-font-family: 'Ubuntu', sans-serif; -fx-text-fill: #33406a;" />
+                            </HBox>
+                        </StackPane>
+
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+
+
+
+
+
+
+
+
+
+
+
+    </children>
+</AnchorPane>
+
+
+
+
+
+
+

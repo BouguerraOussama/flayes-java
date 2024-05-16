@@ -49,6 +49,7 @@ public class Comptes implements Initializable {
     @FXML
     private TableView<User> tableRead;
 
+
     @FXML
     private TableColumn<User,Integer> colonneUser_id;
 
@@ -124,7 +125,6 @@ public class Comptes implements Initializable {
         colonneEmail.setCellValueFactory(new PropertyValueFactory("Email"));
         colonneNumTel.setCellValueFactory(new PropertyValueFactory("tel"));
         colonneImage.setCellValueFactory(new PropertyValueFactory("img"));
-        colonneRole.setCellValueFactory(new PropertyValueFactory("role"));
         tableRead.setItems(tab);
         tableRead.refresh();
     }
@@ -161,10 +161,11 @@ public class Comptes implements Initializable {
         colonneEmail.setCellValueFactory(new PropertyValueFactory("Email"));
         colonneNumTel.setCellValueFactory(new PropertyValueFactory("tel"));
         colonneImage.setCellValueFactory(new PropertyValueFactory("img"));
-        colonneRole.setCellValueFactory(new PropertyValueFactory("role"));
         tableRead.setItems(list);
         //tableRead.refresh();
     }
+
+
     @FXML
     private void onDelete(ActionEvent event) {
         Alert alert=new Alert(AlertType.CONFIRMATION);
@@ -219,11 +220,8 @@ public class Comptes implements Initializable {
                     private final HBox actionsBox = new HBox();
 
                     {
-                        FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
-                        editIcon.setOnMouseClicked(event -> {
-                            User user = getTableView().getItems().get(getIndex());
-                            handleEditUser(user);
-                        });
+
+
 
                         FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
                         deleteIcon.setOnMouseClicked(event -> {
@@ -231,10 +229,10 @@ public class Comptes implements Initializable {
                             handleDeleteUser(user);
                         });
 
-                        editIcon.setStyle("-fx-cursor: hand ; -glyph-size: 28px ; -fx-fill: #00E676;");
+
                         deleteIcon.setStyle("-fx-cursor: hand ; -glyph-size: 28px ; -fx-fill: #ff1744;");
 
-                        actionsBox.getChildren().addAll(editIcon, deleteIcon);
+                        actionsBox.getChildren().addAll(deleteIcon);
                     }
 
                     @Override

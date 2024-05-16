@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 .login-bg{
 
-    -fx-background-color:linear-gradient(to bottom right,#2f466b, #061fd7);
+    -fx-background-color:linear-gradient(to bottom right, #aa06d7, rgba(131, 6, 215, 0.49));
 }
 .exit{
     -fx-background-color:#c22c40;
@@ -45,3 +45,13 @@ and open the template in the editor.
     -fx-underline:true;
 
 }
+
+.login-label {
+    -fx-font-weight: 700;
+    -fx-margin: 0;
+    -fx-line-height: 1.3;
+    -fx-text-fill: #33406a;
+    -fx-font-family: "Ubuntu", sans-serif;
+}
+
+
