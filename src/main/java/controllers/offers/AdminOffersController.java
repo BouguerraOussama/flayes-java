@@ -112,8 +112,14 @@ public class AdminOffersController {
             inspectOfferController.setData(offer, category);
             inspectOfferController.getQuitInspect().setOnAction(this::closeFormButton);
             inspectOfferController.getDelete().setOnAction(e -> {
+
                 inspectOfferController.deleteClicked(e);
                 closeFormButton(e);
+                try {
+                    resetForm();
+                } catch (SQLException | IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             });
             resetForm();
 
