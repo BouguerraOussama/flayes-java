@@ -129,7 +129,7 @@
                                                 <Image url="@../../images/project.png" />
                                              </image>
                                           </ImageView>
-                                          <Button fx:id="SubmitbuttonClicked" layoutX="67.0" layoutY="181.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="91.0" styleClass="submit" text="Submit Offer" textFill="WHITE" />
+                                          <Button fx:id="Submitbutton" layoutX="67.0" layoutY="181.0" mnemonicParsing="false" onAction="#SubmitbuttonClicked" prefHeight="31.0" prefWidth="98.0" styleClass="submit" text="Submit Project" textFill="WHITE" />
                                        </children>
                                     </Pane>
                                  </children>
