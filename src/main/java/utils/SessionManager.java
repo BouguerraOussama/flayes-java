@@ -54,7 +54,7 @@ public final class SessionManager {
                             resultSet.getString("roles"),
                             resultSet.getString("image_name"),
                             resultSet.getInt("status"),
-                            null // ImageView img; - Not included in the constructor
+                            null
                     );
                     setUser_id(user.getUser_id()); // Set the id attribute when user is authenticated
                     System.out.println("Login successful");
@@ -71,6 +71,6 @@ public final class SessionManager {
 
     public void cleanUserSession() {
         current_User = null;
-        id = 0; // Reset id attribute when user session is cleaned
+        id = 0;
     }
 }

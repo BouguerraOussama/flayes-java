@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,6 +16,7 @@ import models.forum.Post;
 import models.forum.Reacts;
 import services.forum.PostService;
 import services.forum.ReactsService;
+import utils.SessionManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,8 +59,10 @@ public class AddPostCardController {
 
     PostService ps = new PostService();
     ReactsService prs = new ReactsService();
+    private final int user_id = SessionManager.getInstance().getUser_id();
 
-     @FXML
+
+    @FXML
      void onViewComments(ActionEvent event) {}
 
     public void setRoomId(int room_id) {
@@ -88,6 +92,8 @@ public class AddPostCardController {
         authorTF.setText(post.getAuthor());
         numberOfDislikes.setText(String.valueOf(ps.readOne(post.getPost_id()).getNumDislikes()));
         numberOfLikes.setText(String.valueOf(ps.readOne(post.getPost_id()).getNumLikes()));
+//        System.out.println(ps.readOne(post.getPost_id()).getNumLikes());
+//        System.out.println(ps.readOne(post.getPost_id()).getNumDislikes());
     }
     void ImportPicture(String path , ImageView view){
         File file = new File(path);
@@ -98,7 +104,16 @@ public class AddPostCardController {
 
     public void onDelete(ActionEvent event) throws SQLException {
             try{
-                ps.delete(post.getPost_id());
+                System.out.println(post.getUser_id());
+                System.out.println(user_id);
+                if (post.getUser_id() == user_id){
+                    ps.delete(post.getPost_id());
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Opps..");
+                    alert.setContentText("User not authorized for this action !");
+                    alert.showAndWait();
+                }
             }catch(SQLException ex){
                 throw new SQLException();
             }
