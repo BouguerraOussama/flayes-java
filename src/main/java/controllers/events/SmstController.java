@@ -13,9 +13,9 @@ public class SmstController {
 
 
     // Remplacez ces valeurs par vos propres informations Twilio
-    private static final String ACCOUNT_SID = "AC419c733c68b4090538e6cd8927d21ce2";
-    private static final String AUTH_TOKEN = "fd1508eefbde11e0fa2634dd8083d333";
-    private static final String TWILIO_PHONE_NUMBER = "+14254092930";
+    private static final String ACCOUNT_SID = "AC2880ffff79050d2b24c0058b6fb6a0e8";
+    private static final String AUTH_TOKEN = "c5d5e97f76d793c17453f38c3d80cd1c";
+    private static final String TWILIO_PHONE_NUMBER = "+18507877143";
 
     // Remplacez cette valeur par votre propre numéro de téléphone
     private static final String VOTRE_NUMERO = "+216 21494353";
