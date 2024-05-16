@@ -292,5 +292,9 @@ public class AddPostController {
     }
 
 
-
+    public void initData(Post post) {
+        authorTF.setText(post.getAuthor());
+        contentTF.setText(post.getContent());
+        img_path.setText(post.getImg_url());
+    }
 }

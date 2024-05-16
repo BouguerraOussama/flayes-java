@@ -51,8 +51,9 @@ public class UpdatePostController {
 
 
     @FXML
-    void initialize(int rid){
-        setRoomId(rid);
+    void initialize(int pid, int roomId){
+        setSqlIdx(pid);
+        setRoomId(roomId);
     }
     @FXML
     void upload_img(ActionEvent event) {
@@ -100,6 +101,7 @@ public class UpdatePostController {
                 return;
             }
                 System.out.println(user_id);
+            if (ps.readOne(sqlIdx).getUser_id() == user_id){
                 ps.update(new Post(sqlIdx,room_id,authorTF.getText(),contentTF.getText(),img_path.getText()));
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
@@ -108,7 +110,12 @@ public class UpdatePostController {
                 for (TextField textField : Arrays.asList(authorTF, contentTF,img_path)) {
                     textField.setText("");
                 }
-
+            }else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Opps..");
+                alert.setContentText("User not authorized for this action !");
+                alert.showAndWait();
+            }
         }catch(SQLException ex){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");

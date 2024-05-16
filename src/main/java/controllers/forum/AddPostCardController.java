@@ -32,10 +32,6 @@ public class AddPostCardController {
 
     @FXML
     private Text authorTF;
-
-    @FXML
-    private Text numbreOfComments;
-
     @FXML
     private Button onDelete;
 
@@ -92,8 +88,6 @@ public class AddPostCardController {
         authorTF.setText(post.getAuthor());
         numberOfDislikes.setText(String.valueOf(ps.readOne(post.getPost_id()).getNumDislikes()));
         numberOfLikes.setText(String.valueOf(ps.readOne(post.getPost_id()).getNumLikes()));
-//        System.out.println(ps.readOne(post.getPost_id()).getNumLikes());
-//        System.out.println(ps.readOne(post.getPost_id()).getNumDislikes());
     }
     void ImportPicture(String path , ImageView view){
         File file = new File(path);
@@ -129,18 +123,19 @@ public class AddPostCardController {
             updateStage.initModality(Modality.APPLICATION_MODAL);
             Parent root = fxmlLoader.load();
             UpdatePostController controller = fxmlLoader.getController();
-            controller.initialize(post.getPost_id());
+            controller.initialize(post.getPost_id(),post.getRoom_id());
             controller.initData(post);
             updateStage.setScene(new Scene(root));
             updateStage.setTitle("Update Room");
             updateStage.show();
-        } catch (IOException ex) {
+        }
+        catch (IOException ex) {
             System.out.println("Error: " + ex.getMessage());
         }
         setPost();
     }
     public void react(boolean isLiked) throws SQLException {
-        Reacts existingReact = prs.getReactByUserAndPost(1, post.getPost_id());
+        Reacts existingReact = prs.getReactByUserAndPost(user_id, post.getPost_id());
         if (existingReact != null) {
             if (isLiked) {
                 prs.updateLikesNumber(post.getPost_id(), true);
@@ -150,7 +145,7 @@ public class AddPostCardController {
             prs.updateReact(post.getPost_id(), isLiked);
             prs.removeReact(existingReact.getUser_id(), existingReact.getReact_id());
         } else {
-            Reacts react = new Reacts(post.getPost_id(), 1, isLiked);
+            Reacts react = new Reacts(post.getPost_id(), user_id, isLiked);
             prs.createReact(react);
             if (isLiked) {
                 prs.updateLikesNumber(post.getPost_id(), false);
