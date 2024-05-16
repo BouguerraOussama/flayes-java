@@ -12,10 +12,10 @@ public class ProjectCardController {
     public Label project_status;
     public Label date_of_expiration;
     public Button projectCardButton;
-    private int ProjectKey;
+    private Project project;
 
     public void setData(Project project) {
-        ProjectKey = project.getId();
+        this.project = project;
         this.project_name.setText(project.getName());
         this.project_type.setText(project.getType());
         switch (project.getUser_status()) {
@@ -39,7 +39,7 @@ public class ProjectCardController {
         return projectCardButton;
     }
 
-    public int projectCardButtonClicked() {
-        return this.ProjectKey;
+    public Project projectCardButtonClicked() {
+        return this.project;
     }
 }

@@ -15,7 +15,7 @@ public class ReactsService implements IService<Reacts>{
             connection = MyDataBase.getInstance().getConnection();
         }
     public void createReact(Reacts reacts) throws SQLException {
-        String sql = "INSERT INTO postreact (user_id, post_id, Islike) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO post_react (user_id, post_id, isliked) VALUES (?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, reacts.getUser_id());
         statement.setInt(2, reacts.getPost_id());
@@ -23,15 +23,15 @@ public class ReactsService implements IService<Reacts>{
         statement.executeUpdate();
     }
 
-    public void updateReact(int react_id, boolean isLiked) throws SQLException {
-        String sql = "UPDATE postreact SET Islike = ? WHERE react_id = ?";
+    public void updateReact(int react_id, boolean isliked) throws SQLException {
+        String sql = "UPDATE post_react SET isliked = ? WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setBoolean(1, isLiked);
+        ps.setBoolean(1, isliked);
         ps.setInt(2, react_id);
         ps.executeUpdate();
     }
     public void removeReact(int user_id, int post_id) throws SQLException {
-        String sql = "DELETE FROM postreact WHERE user_id = ? AND post_id = ?";
+        String sql = "DELETE FROM post_react WHERE user_id = ? AND post_id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, user_id);
         statement.setInt(2, post_id);
@@ -40,45 +40,45 @@ public class ReactsService implements IService<Reacts>{
 
     public Reacts getReactByUserAndPost(int user_id, int post_id) throws SQLException {
         Reacts react = null;
-        String query = "SELECT * FROM postreact WHERE user_id = ? AND post_id = ?";
+        String query = "SELECT * FROM post_react WHERE user_id = ? AND post_id = ?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, user_id);
         statement.setInt(2, post_id);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             int id = resultSet.getInt("react_id");
-            boolean isLike = resultSet.getBoolean("Islike");
-            react = new Reacts(id, post_id, user_id, isLike);
+            boolean isliked = resultSet.getBoolean("isliked");
+            react = new Reacts(id, post_id, user_id, isliked);
         }
         return react;
     }
 
 
     private int getCurrentLikes(int postId) throws SQLException {
-        String sql = "SELECT NumLikes FROM post WHERE post_id = ?";
+        String sql = "SELECT num_likes FROM post WHERE post_id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, postId);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            return rs.getInt("NumLikes");
+            return rs.getInt("num_likes");
         }
         return 0;
     }
 
     private int getCurrentDislikes(int postId) throws SQLException {
-        String sql = "SELECT NumDislikes FROM post WHERE post_id = ?";
+        String sql = "SELECT num_dislikes FROM post WHERE post_id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, postId);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            return rs.getInt("NumDislikes");
+            return rs.getInt("num_dislikes");
         }
         return 0;
     }
 
 
     public void updateDislikesNumber(int postId, boolean isClicked) throws SQLException {
-        String sql = "UPDATE post SET NumDislikes = ? WHERE post_id = ?";
+        String sql = "UPDATE post SET num_dislikes = ? WHERE post_id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         int currentDislikes = getCurrentDislikes(postId);
         if (isClicked) {
@@ -91,7 +91,7 @@ public class ReactsService implements IService<Reacts>{
     }
 
     public void updateLikesNumber(int postId, boolean isClicked) throws SQLException {
-        String sql = "UPDATE post SET NumLikes = ? WHERE post_id = ?";
+        String sql = "UPDATE post SET num_likes = ? WHERE post_id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         int currentlikes = getCurrentLikes(postId);
         if (isClicked) {

@@ -6,50 +6,78 @@ public class Post {
     private String author;
     private String content;
     private String img_url;
-    private int number_of_comments;
     private int NumLikes;
     private int NumDislikes;
+    private int user_id;
 
     public Post(){}
 
-    public Post(int room_id , String author , String content , String url , int nc,int NumLikes,int NumDislikes){
+    public Post(int room_id , String author , String content , String url ,int NumLikes,int NumDislikes , int user_id){
         this.room_id = room_id;
         this.author = author;
         this.content = content;
         this.img_url = url;
-        this.number_of_comments = nc;
+        this.user_id = user_id;
         this.NumLikes = NumLikes;
         this.NumDislikes = NumDislikes;
     }
-    public Post(int id , int room_id , String author , String content , String url , int nc,int NumLikes,int NumDislikes){
+    public Post(int id , int room_id , String author , String content , String url , int NumLikes,int NumDislikes, int user_id){
         this.post_id = id;
         this.room_id = room_id;
         this.author = author;
         this.content = content;
-        this.number_of_comments = nc;
+        this.user_id = user_id;
         this.img_url = url;
         this.NumLikes = NumLikes;
         this.NumDislikes = NumDislikes;
     }
 
-    public Post(int room_id , String author , String content , String url , int nc){
+    public Post(int room_id , String author , String content , String url , int user_id){
         this.room_id = room_id;
         this.author = author;
         this.content = content;
-        this.number_of_comments = nc;
+        this.user_id = user_id;
         this.img_url = url;
     }
 
-    public Post(int id , int room_id , String author , String content , String url,int nc){
+    public Post(int id , int room_id , String author , String content , String url,int user_id){
         this.post_id = id;
         this.room_id = room_id;
         this.author = author;
         this.content = content;
-        this.number_of_comments = nc;
+        this.user_id = user_id;
+        this.img_url = url;
+    }
+
+    public Post(int room_id , String author , String content , String url){
+        this.room_id = room_id;
+        this.author = author;
+        this.content = content;
+        this.img_url = url;
+    }
+
+    public Post(int id , int room_id , String author , String content , String url){
+        this.post_id = id;
+        this.room_id = room_id;
+        this.author = author;
+        this.content = content;
         this.img_url = url;
     }
 
 
+    @Override
+    public String toString() {
+        return "Post{" +
+                "post_id=" + post_id +
+                ", room_id=" + room_id +
+                ", author='" + author + '\'' +
+                ", content='" + content + '\'' +
+                ", img_url='" + img_url + '\'' +
+                ", NumLikes=" + NumLikes +
+                ", NumDislikes=" + NumDislikes +
+                ", user_id=" + user_id +
+                '}';
+    }
 
     public int getPost_id() {
         return post_id;
@@ -83,12 +111,12 @@ public class Post {
         this.content = content;
     }
 
-    public int getNumber_of_comments() {
-        return number_of_comments;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setNumber_of_comments(int number_of_comments) {
-        this.number_of_comments = number_of_comments;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getImg_url() {

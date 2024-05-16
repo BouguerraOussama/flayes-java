@@ -43,8 +43,18 @@ public class CategoryService implements IService<Category> {
 
 
     @Override
-    public void update(Category o) throws SQLException {
+    public void update(Category category) throws SQLException {
+        String sql = "UPDATE funding SET type = ?, attribute1 = ?, attribute2 = ?, attribute3 = ?, textAttribute = ? WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, category.getType());
+            statement.setFloat(2, category.getAttribute1());
+            statement.setFloat(3, category.getAttribute2());
+            statement.setFloat(4, category.getAttribute3());
+            statement.setString(5, category.getTextAttribute());
+            statement.setInt(6, category.getId());
 
+            statement.executeUpdate();
+        }
     }
 
     @Override

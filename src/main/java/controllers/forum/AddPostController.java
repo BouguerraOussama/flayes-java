@@ -13,9 +13,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import models.forum.Post;
+import models.users.User;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 import services.forum.PostService;
+import utils.SessionManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +35,7 @@ public class AddPostController {
     @FXML
     private VBox ListPosts;
     private int room_id;
+    private int user_id = SessionManager.getInstance().getUser_id();
 
     @FXML
     private TextField authorTF;
@@ -164,9 +167,8 @@ public class AddPostController {
             }
             //API to mask bad words
             BadWordDetection();
-            //Generates new random number
-            Random random = new Random();
-            ps.create(new Post(room_id,authorTF.getText(),contentTF.getText(),img_path.getText(),random.nextInt(100)));
+            //retrieve the ID of the user
+            ps.create(new Post(room_id,authorTF.getText(),contentTF.getText(),img_path.getText(),user_id));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setContentText("Post added");
@@ -290,5 +292,9 @@ public class AddPostController {
     }
 
 
-
+    public void initData(Post post) {
+        authorTF.setText(post.getAuthor());
+        contentTF.setText(post.getContent());
+        img_path.setText(post.getImg_url());
+    }
 }
