@@ -7,6 +7,7 @@ package services.users;
 
 
 import com.google.gson.Gson;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import models.users.User;
@@ -14,6 +15,12 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import utils.MyDataBase;
+import org.mindrot.jbcrypt.BCrypt;
+
+import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -38,6 +45,7 @@ public class UserService implements IService<User> {
 
 
     private Connection conn;
+    private Connection connection;
     private Statement ste;
     private PreparedStatement pst;
     private ResultSet rs;
@@ -63,7 +71,6 @@ public class UserService implements IService<User> {
     }
 
 
-
     public String toJsonn(String role) {
         User user = new User()  ;
         Gson g = new Gson();
@@ -75,13 +82,15 @@ public class UserService implements IService<User> {
 
     public void insertUserPst(User u) {
         String req = "insert into user (name,email,tel,password,roles,image_name,status) values (?,?,?,?,?,?,?)";
+        String hashedPassword = BCrypt.hashpw(u.getPassword(), BCrypt.gensalt());
+
         try {
 
             pst = conn.prepareStatement(req);
             pst.setString(1, u.getUsername());
             pst.setString(2, u.getEmail());
             pst.setString(3, u.getTel());
-            pst.setString(4, u.getPassword());
+            pst.setString(4, hashedPassword);
             pst.setString(5, u.getRole());
             pst.setString(6, u.getImage_name());
             pst.setInt(7, 0) ;
@@ -187,7 +196,7 @@ public class UserService implements IService<User> {
             ste = conn.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {
-                String path="http://127.0.0.1:8000/images/user/"+rs.getString("image_name");
+                String path="C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" +rs.getString("image_name");
                 ImageView img = new ImageView(new Image(path,true));
                 img.setFitHeight(50);
                 img.setFitWidth(50);
@@ -217,7 +226,7 @@ public class UserService implements IService<User> {
             if(rs.next()){
                 System.out.println("fel rs t5al");
                 String query = "update user set status = 1 where id=?";
-                String path="http://127.0.0.1:8000/images/user/"+rs.getString("image_name");
+                String path="C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\"+rs.getString("image_name");
                 ImageView img = new ImageView(new Image(path,true));
                 img.setFitHeight(50);
                 img.setFitWidth(50);
@@ -274,7 +283,7 @@ public class UserService implements IService<User> {
             ste=conn.createStatement();
             rs= ste.executeQuery(req);
             while(rs.next()){
-                String path="http://127.0.0.1:8000/images/user/"+rs.getString("image_name");
+                String path="C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\"+rs.getString("image_name");
                 ImageView img = new ImageView(new Image(path,true));
                 img.setFitHeight(50);
                 img.setFitWidth(50);
@@ -295,12 +304,18 @@ public class UserService implements IService<User> {
             rs = ste.executeQuery(req);
 
             while (rs.next()) {
-                String imagePath = "file:///C:/Users/user/Desktop/User/src/main/resources/users/" + rs.getString("image_name");
-                Image image = new Image(imagePath, true);
-                ImageView imageView = new ImageView(image);
-                // You can set fitHeight and fitWidth here if needed
-                 imageView.setFitHeight(100);
-                 imageView.setFitWidth(100);
+                String imagePath = "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\";
+                String imageFileName = rs.getString("image_name"); // Fetch image filename from the result set
+                String completeFilePath = imagePath + imageFileName;
+                File file = new File(completeFilePath);
+                Image image = new Image(file.toURI().toString());
+
+                ImageView imageView = new ImageView(image); // Create a new ImageView for each image
+                imageView.setFitHeight(50.0);
+                imageView.setFitWidth(50.0);
+                imageView.setPreserveRatio(true);
+                imageView.setPickOnBounds(true);
+
                 list.add(new User(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("tel"), rs.getString("password"), rs.getString("roles"), rs.getString("image_name"), rs.getInt("status"), imageView));
             }
         } catch (SQLException ex) {
@@ -316,7 +331,9 @@ public class UserService implements IService<User> {
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
-                String imagePath = "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-\\src\\main\\resources\\images\\" + rs.getString("image_name");
+                String imagePath = " C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" + rs.getString("image_name");
+
+
                 Image image = new Image(imagePath, true);
                 ImageView imageView = new ImageView(image);
                 // You can set fitHeight and fitWidth here if needed
@@ -613,7 +630,7 @@ public class UserService implements IService<User> {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                String path = "http://127.0.0.1:8000/users/" + resultSet.getString("image_name");
+                String path = "file:///" + "C://Users/user/Desktop/Flayes-Flayes-offers - Copie/public/uploads/images/" + resultSet.getString("image_name");
                 ImageView img = new ImageView(new Image(path, true));
                 img.setFitHeight(50);
                 img.setFitWidth(50);
@@ -657,5 +674,126 @@ public class UserService implements IService<User> {
         return list;
     }
 
+    public boolean emailExists(String email) {
+        String SQL = "SELECT COUNT(*) FROM user WHERE email = ?";
+        try (
+             PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+            pstmt.setString(1, email);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Optionally, consider logging this exception or rethrowing it.
+        }
+        return false;
+    }
 
+
+
+    public String findResetTokenByEmail(String email) {
+        String resetToken = null;
+        String query = "SELECT reset_token FROM user WHERE email = ?";
+
+        try (Connection connection = MyDataBase.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the email parameter
+            preparedStatement.setString(1, email);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    resetToken = resultSet.getString("reset_token");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resetToken;
+    }
+
+    public boolean addToken(String email, String token) {
+        // SQL query to update the reset_token column for the given email
+        String updateQuery = "UPDATE user SET reset_token = ? WHERE email = ?";
+
+        try (Connection connection = MyDataBase.getInstance().getConnection();
+             PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
+
+            // Set parameters for the update query
+            updateStatement.setString(1, token);
+            updateStatement.setString(2, email);
+
+            // Execute the update query
+            int rowsUpdated = updateStatement.executeUpdate();
+
+            // Check if the update was successful
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Return false if something went wrong
+        return false;
+    }
+
+    public void mail(String receiverMail, String code) {
+        String host = "iben46655@gmail.com";
+        final String user = "iben46655@gmail.com";
+        final String password = "hvgetegqlqdnzola";
+
+        String to = receiverMail;
+
+        Properties props = new Properties();
+        props.put("mail.smtp.ssl.trust", "*");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+                    protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(user, password);
+                    }
+                });
+
+        String subject = "Password Reset Code";
+        String content = "<h1>Password Reset Code:</h1><p>Your password reset code is: " + code + "</p>";
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(user));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject(subject);
+            message.setContent(content, "text/html");
+
+            Transport.send(message);
+
+            System.out.println("Message sent successfully via email.");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void resetPassword(String email , String newPassword) {
+        String SQL = "UPDATE user SET password = ? WHERE email = ?";
+
+        try (Connection conn = MyDataBase.getInstance().getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+            pstmt.setString(1, newPassword);
+            pstmt.setString(2, email);
+
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("Password updated successfully.");
+            } else {
+                System.out.println("No password updated.");
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
 }

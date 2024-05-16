@@ -64,11 +64,11 @@ public class MainPageController {
     @FXML
     void initialize(URL url, ResourceBundle rb) {
         setActive(btn_home);
-        //user = us.getUserConnected();
-        // Get the user and load the image
+
         user=us.getUserById(SessionManager.getInstance().getUser_id());
-        String imagePath = "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-\\src\\main\\resources\\images\\";
-        String imageFileName = "femme.png";
+        // Get the user and load the image
+        String imagePath =  "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" ;
+        String imageFileName = user.getImage_name();
         String completeFilePath = imagePath + imageFileName;
         File file = new File(completeFilePath);
         Image image = new Image(file.toURI().toString());
@@ -159,12 +159,12 @@ public class MainPageController {
         setActive(btn_user);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/fxml/users/Comptes.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/fxml/users/test.fxml"));
             view = fxmlLoader.load();
             //user = us.getUserConnected();
             user=us.getUserById(SessionManager.getInstance().getUser_id());
             // Get the user and load the image
-            String imagePath = "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-\\src\\main\\resources\\images\\";
+            String imagePath =  "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" ;
             String imageFileName = user.getImage_name();
             String completeFilePath = imagePath + imageFileName;
             File file = new File(completeFilePath);

@@ -80,6 +80,7 @@ public class ShowReclamation implements Initializable {
         this.description.setText(r.getDescriptionR());
         this.objet.setText(r.getObjet());
         System.out.println(r.getDescriptionR());
+        this.Modifier.setVisible(false);
         this.Modifier.setOnMouseClicked((m) -> {
             ReclamationService serv = new ReclamationService();
             if (!r.getDescriptionR().equals("")) {
@@ -110,7 +111,13 @@ public class ShowReclamation implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         user = us.getUserById(SessionManager.getInstance().getUser_id());
 
-        this.type.getItems().addAll("Technic", "Non technic");
+        type.getItems().clear(); // Clear existing items
+        type.getItems().addAll(
+                "Investment Related",
+                "Event Related",
+                "Website Bug",
+                "Account Problem"
+        );
         this.type.getSelectionModel().selectFirst();
         this.Modifier.setOnMouseClicked((m) -> {
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -131,14 +138,15 @@ public class ShowReclamation implements Initializable {
             modif.setFill(Color.GREEN);
             modif.setGlyphSize(25);
             modif.setCursor(Cursor.HAND);
+            modif.setVisible(false);
             lc.getChildren().add(modif);
-            lc.setTranslateX(300.0);
-            lc.setTranslateY(5.0);
+            lc.setTranslateX(200.0);
+            lc.setTranslateY(20.0);
             FontAwesomeIconView supp = new FontAwesomeIconView(FontAwesomeIcon.TRASH_ALT);
             supp.setFill(Color.RED);
             supp.setGlyphSize(25);
             supp.setCursor(Cursor.HAND);
-            supp.setTranslateX(5.0);
+            supp.setTranslateX(20.0);
             lc.getChildren().add(supp);
             HBox obj = new HBox();
             Label t = new Label("    Type        : " + e.getTypeR());
@@ -204,9 +212,9 @@ public class ShowReclamation implements Initializable {
                 p.setTypeR(this.type.getValue());
                 serv.create(p);
                 Alert alert = new Alert(AlertType.CONFIRMATION);
-                alert.setTitle("TravelMe :: Boite Mail");
+                alert.setTitle("Flayes :: Boite Mail");
                 alert.setHeaderText((String)null);
-                alert.setContentText("consulter votre boite mail !!");
+                alert.setContentText("Check your emails!!");
                 alert.showAndWait();
                 // Refresh the data
                 refreshData();

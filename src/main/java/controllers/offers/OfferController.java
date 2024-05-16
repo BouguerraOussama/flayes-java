@@ -80,7 +80,7 @@ public class OfferController {
         descriptionError.setVisible(false);
         typeError.setVisible(false);
         try{
-            loadingProjects();
+            //loadingProjects();
             loadingOffers();
         }catch (IOException  | SQLException e) {
             throw new RuntimeException(e);
@@ -338,6 +338,7 @@ public class OfferController {
         System.out.println("huh");
     }
     private void loadingProjects() throws SQLException, IOException {
+        /*
         projects = projectService.read();
         projects_list.getChildren().clear();
         for (Project project : projects) {
@@ -363,6 +364,8 @@ public class OfferController {
                 e.printStackTrace();
             }
         }
+
+         */
     }
     private void loadingOffers() throws SQLException, IOException {
 

@@ -97,7 +97,7 @@ public class UpdateUser implements Initializable {
             Image img = new Image(new FileInputStream(filename));
             image.setImage(img);
             //Déplacer l'image
-            String newPath="C:\\Users\\user\\Desktop\\User\\src\\main\\resources\\users\\";
+            String newPath="C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\";
             File sourceFile=null;
             File destinationFile=null;
             String nFile = f.getName();
@@ -165,7 +165,7 @@ public class UpdateUser implements Initializable {
             img.setImage(null); // Handle the case when the image is null
         }
         // Assuming comboboxRole is a ComboBox to select user roles
-        comboboxRole.setItems(FXCollections.observableArrayList("[\"ROLE_ADMIN\"]","[\"ROLE_ORGANISATEUR\"]","[\"ROLE_USER\"]"));
+        comboboxRole.setItems(FXCollections.observableArrayList("[\"ROLE_ADMIN\"]","[\"ROLE_USER\"]"));
     }
 
 

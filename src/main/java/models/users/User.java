@@ -28,6 +28,7 @@ public class User {
     private String image_name;
     private ImageView img;
     private int status;
+    private String reset_token;
 
     public User() {
     }
@@ -156,7 +157,13 @@ public class User {
     }
 
 
+    public String getReset_token() {
+        return reset_token;
+    }
 
+    public void setReset_token(String reset_token) {
+        this.reset_token = reset_token;
+    }
 
 
     public String getRole() {
