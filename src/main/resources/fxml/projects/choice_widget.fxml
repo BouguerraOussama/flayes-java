@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="760.0" prefWidth="1230.0" stylesheets="@../../style/projects/choise_widget.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.projects.MainPageController">
+   <children>
+      <Pane layoutX="300.0" layoutY="-200.0" prefHeight="430.0" prefWidth="315.0" rotate="-35.5" style="-fx-background-color: #535C91; -fx-background-radius: 40;" />
+      <BorderPane fx:id="Main_content" prefHeight="760.0" prefWidth="1230.0">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="53.0" prefWidth="148.0" text="Projects:" textAlignment="JUSTIFY" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="25.0" />
+                     </padding>
+                  </Label>
+                  <HBox prefHeight="477.0" prefWidth="946.0" spacing="25.0">
+                     <children>
+                        <TableView fx:id="projectTableView" prefHeight="452.0" prefWidth="800.0" styleClass="inner_pane">
+
+                           <columns>
+                              <TableColumn fx:id="nameColumn" prefWidth="386.0" text="Project Name" />
+                              <TableColumn fx:id="categoryColumn" prefWidth="374.0" text="Category" />
+                           </columns>
+                        </TableView>
+                        <ScrollPane prefHeight="477.0" prefWidth="450.0" styleClass="project-info-pane">
+                           <content>
+                              <AnchorPane prefHeight="683.0" prefWidth="370.0">
+                                 <children>
+                                    <VBox prefHeight="683.0" prefWidth="451.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label alignment="TOP_CENTER" prefHeight="28.0" prefWidth="454.0" styleClass="project-info-title" text="Project Informations" textFill="#3136d0">
+                                             <font>
+                                                <Font name="Arial Rounded MT Bold" size="17.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox alignment="CENTER" prefHeight="101.0" prefWidth="421.0">
+                                             <children>
+                                                <ImageView fitHeight="97.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../images/cartoon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="38.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="21.0" prefWidth="125.0" styleClass="project-info-label" text="Project Name:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" styleClass="project-info-item" text="Label" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets right="15.0" />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets left="25.0" top="15.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="139.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="21.0" prefWidth="125.0" styleClass="project-info-label" text="Description:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="158.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="21.0" prefWidth="125.0" styleClass="project-info-label" text="Target Audience:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" styleClass="project-info-item" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="177.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="21.0" prefWidth="150.0" styleClass="project-info-label" text="Demand in Market:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" styleClass="project-info-item" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="196.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="20.0" prefWidth="169.0" styleClass="project-info-label" text="Development time line:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" styleClass="project-info-value" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="215.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="19.0" prefWidth="179.0" styleClass="project-info-label" text="Budget FundingRequirements:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" styleClass="project-info-value" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="234.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="21.0" prefWidth="125.0" styleClass="project-info-label" text="Risk Analysis:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="139.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="21.0" prefWidth="125.0" styleClass="project-info-label" text="Market Strategy:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="158.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="21.0" prefWidth="125.0" styleClass="project-info-label" text="Exit Strategie:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="177.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="21.0" prefWidth="125.0" styleClass="project-info-label" text="Team Background:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="196.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="20.0" prefWidth="150.0" styleClass="project-info-label" text="Demand in Market:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="215.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="19.0" prefWidth="132.0" styleClass="project-info-label" text="Tags:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="234.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="19.0" prefWidth="179.0" styleClass="project-info-label" text="Unique Selling Points:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="253.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="21.0" prefWidth="125.0" styleClass="project-info-label" text="DailyPriceOfAssets">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="386.0" prefHeight="19.0" prefWidth="436.0" spacing="80.0" styleClass="project-info-box">
+                                             <children>
+                                                <Label prefHeight="21.0" prefWidth="125.0" styleClass="project-info-label" text="Investors Equity:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="60.0" text="Label" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="25.0" />
+                                             </padding>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <HBox prefHeight="84.0" prefWidth="754.0" spacing="25.0">
+                           <children>
+                              <Button fx:id="add_p_btn" mnemonicParsing="false" onAction="#handleAddProjectButton" prefHeight="32.0" prefWidth="124.0" text="Add New Project" textFill="#eeeeee" />
+                              <Button fx:id="upt_p_btn" mnemonicParsing="false" onAction="#handleUppProjectButton" prefHeight="32.0" prefWidth="124.0" text="UpdateProject" textFill="WHITE" />
+                              <Button fx:id="del_p_btn" mnemonicParsing="false" onAction="#handleDeleteProjectAction" prefHeight="32.0" prefWidth="124.0" text="Delete Project" textFill="WHITE" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" prefHeight="84.0" prefWidth="836.0" spacing="25.0">
+                           <children>
+                              <Button fx:id="add_c_btn" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="32.0" prefWidth="124.0" text="Add New Category" textFill="WHITE" />
+                              <Button fx:id="upt_c_btn" mnemonicParsing="false" onAction="#handleUpdateButton" prefHeight="32.0" prefWidth="124.0" text="Update  Category" textFill="WHITE" />
+                              <Button fx:id="del_c_btn" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="32.0" prefWidth="124.0" text="Delete Category" textFill="WHITE" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets top="25.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+            </VBox>
+         </center></BorderPane>
+   </children>
+</AnchorPane>

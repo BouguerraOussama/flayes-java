@@ -1,0 +1,196 @@
+.root{
+    -fx-background-color:#070F2B;
+}
+.side_anchorPane {
+    -fx-background-color: #1B1A55;
+    -fx-border-width: 0px 2px 0px 2px;
+    -fx-border-style: solid;
+    -fx-border-color: #151A38;
+}
+.logo_sidePane {
+    -fx-background-color: #1B1A55;
+    -fx-border-width: 0px 2px 0px 2px;
+    -fx-background-radius: 0px 20px 0px 0px;
+    -fx-border-radius: 0px 20px 0px 0px;
+    -fx-border-style: solid;
+    -fx-border-color: #151A38;
+}
+.bottom_sidePane {
+    -fx-background-color: #1B1A55;
+    -fx-border-width: 0px 2px 0px 2px;
+    -fx-background-radius: 0px 0px 20px 0px;
+    -fx-border-radius: 0px 0px 20px 0px;
+    -fx-border-style: solid;
+    -fx-border-color: #151A38;
+}
+.inner_pane{
+    -fx-background-color:#748CF1;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #748CF1;
+}
+.most_inner_pane{
+    -fx-background-color:#535C91;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-style: solid;
+}
+Button{
+    -fx-background-color:none;
+    -fx-effect: dropshadow(gaussian, rgb(84, 113, 231), 10, 0, 0, 1);
+    -fx-border-width: 0px 0.5px 0.5px 0px;
+    -fx-border-style: solid;
+    -fx-border-color: #141313;
+}
+Button:hover{
+    -fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);
+}
+.btn_active{
+    -fx-background-color:#141313;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-style: solid;
+    -fx-border-color: #141313;
+}
+.text-field {
+    -fx-background-color:#070F2B;
+    -fx-border-color: #535C91;
+    -fx-border-width: 0 0 2 0;
+    -fx-text-fill: #070F2B;
+    -fx-font-size: 18;
+}
+#add_p_btn{
+  -fx-background-color:green;
+
+}
+#upt_p_btn{
+  -fx-background-color:rgb(0,100,255);
+}
+#del_p_btn{
+    -fx-background-color:rgb(255,0,50);
+}
+#btn_project{
+-fx-background-color:rgb(0,0,100);
+ visibility:0.1;
+}
+#add_c_btn{
+  -fx-background-color:green;
+
+}
+#upt_c_btn{
+  -fx-background-color:rgb(0,100,255);
+}
+#del_c_btn{
+    -fx-background-color:rgb(255,0,50);
+}
+/* General Widget Styling */
+.widget-pane {
+    -fx-background-color: #2A2A72;
+    -fx-border-color: #464775;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 10);
+}
+
+.widget-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #EAEAEA;
+    -fx-padding: 0 0 10px 0;
+}
+
+.widget-content {
+    -fx-padding: 5px;
+}
+/* Project Information Widget Styling */
+.project-info-pane {
+    -fx-background-color: #303F9F;
+    -fx-border-color: #3F51B5;
+    -fx-border-width: 0 px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 10);
+}
+
+.project-info-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.project-info-value {
+    -fx-font-size: 14px;
+    -fx-text-fill: #B39DDB;
+    -fx-font-weight: normal;
+}
+.project-info-box {
+    -fx-spacing: 10;
+    -fx-padding: 10;
+    -fx-background-color: #FFFFFF;
+}
+
+.project-info-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2a2a2a;
+}
+
+.project-info-item {
+    -fx-spacing: 5;
+    -fx-alignment: center_left;
+}
+
+.project-info-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #4a4a4a;
+    -fx-font-weight: bold;
+}
+
+.project-info-value {
+    -fx-font-size: 14px;
+    -fx-text-fill: #616161;
+}
+.table-view {
+    -fx-background-color: #f2f2f2;
+    -fx-border-color: #bebebe;
+    -fx-border-width: 1px;
+}
+
+.table-view .column-header-background .label {
+    -fx-background-color: #4a4a4a;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12pt;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-row-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+}
+
+.table-view .table-row-cell:filled:even {
+    -fx-background-color: #f9f9f9;
+}
+
+.table-view .table-row-cell:filled:odd {
+    -fx-background-color: #e7e7e7;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #039ed3;
+    -fx-text-fill: white;
+}
+
+.table-view .scroll-bar {
+    -fx-background-color: #2f2f2f;
+}
+
+.table-view .scroll-bar .thumb {
+    -fx-background-color: #787878;
+}

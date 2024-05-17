@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="565.0" prefWidth="497.0" styleClass="main_widget" stylesheets="@../../style/projects/add_categorie.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.projects.AddCategoryController">
+    <children>
+        <Pane layoutX="22.0" layoutY="-178.0" prefHeight="453.0" prefWidth="190.0" rotate="-35.5" style="-fx-background-color: #535C91; -fx-background-radius: 40;" />
+        <VBox alignment="TOP_CENTER" prefHeight="565.0" prefWidth="497.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label alignment="TOP_CENTER" prefHeight="35.0" prefWidth="457.0" styleClass="title" text="Add Category" textAlignment="JUSTIFY" textFill="WHITE">
+                    <font>
+                        <Font name="Bell MT Italic" size="18.0" />
+                    </font>
+                </Label>
+                <HBox alignment="TOP_CENTER" prefHeight="565.0" prefWidth="414.0">
+                    <children>
+                        <VBox prefHeight="365.0" prefWidth="457.0">
+                            <children>
+                                <Label text="Enter the name of your category:*" textFill="WHITE" />
+                                <TextField fx:id="nameField" prefHeight="52.0" prefWidth="442.0">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                </TextField>
+                                <Label layoutX="10.0" layoutY="10.0" text="Enter subfield name :*" textFill="WHITE" />
+                                <TextField fx:id="subfieldField" layoutX="10.0" layoutY="69.0" prefHeight="56.0" prefWidth="442.0">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                </TextField>
+                                <Label layoutX="10.0" layoutY="94.0" text="Choose type of funding:" textFill="WHITE" />
+                                <ComboBox fx:id="typeOfFundingComboBox" editable="true" prefHeight="41.0" prefWidth="181.0" visibleRowCount="4" />
+                                <Label layoutX="10.0" layoutY="311.0" text="Select profitability index *" textFill="WHITE" />
+                                <ComboBox fx:id="yearComboBox" layoutX="15.0" layoutY="130.0" prefHeight="48.0" prefWidth="180.0" visibleRowCount="4" />
+                            </children>
+                            <padding>
+                                <Insets bottom="15.0" left="5.0" right="10.0" top="15.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox spacing="5.0">
+                    <children>
+                        <Label fx:id="labelErrorMessage" textFill="#FF0000" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#handleSubmitButtonClicked" prefHeight="40.0" prefWidth="116.0" text="Submit" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

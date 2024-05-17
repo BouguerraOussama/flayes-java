@@ -1,0 +1,61 @@
+.root{
+    -fx-background-color:#070F2B;
+}
+.side_anchorPane {
+    -fx-background-color: #1B1A55;
+    -fx-border-width: 0px 2px 0px 2px;
+    -fx-border-style: solid;
+    -fx-border-color: #151A38;
+}
+.logo_sidePane {
+    -fx-background-color: #1B1A55;
+    -fx-border-width: 0px 2px 0px 2px;
+    -fx-background-radius: 0px 20px 0px 0px;
+    -fx-border-radius: 0px 20px 0px 0px;
+    -fx-border-style: solid;
+    -fx-border-color: #151A38;
+}
+.bottom_sidePane {
+    -fx-background-color: #1B1A55;
+    -fx-border-width: 0px 2px 0px 2px;
+    -fx-background-radius: 0px 0px 20px 0px;
+    -fx-border-radius: 0px 0px 20px 0px;
+    -fx-border-style: solid;
+    -fx-border-color: #151A38;
+}
+.inner_pane{
+    -fx-background-color:#748CF1;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #748CF1;
+}
+.most_inner_pane{
+    -fx-background-color:#535C91;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-style: solid;
+}
+Button{
+    -fx-background-color:none;
+    -fx-effect: dropshadow(gaussian, rgb(84, 113, 231), 10, 0, 0, 1);
+    -fx-border-width: 0px 0.5px 0.5px 0px;
+    -fx-border-style: solid;
+    -fx-border-color: #141313;
+}
+Button:hover{
+    -fx-effect: dropshadow(gaussian, rgba(1, 22, 255, 0.7), 10, 0, 0, 1);
+}
+.btn_active{
+    -fx-background-color:#141313;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-style: solid;
+    -fx-border-color: #141313;
+}
+.text-field {
+    -fx-background-color:#070F2B;
+    -fx-border-color: #535C91;
+    -fx-border-width: 0 0 2 0;
+    -fx-text-fill: #070F2B;
+    -fx-font-size: 18;
+}

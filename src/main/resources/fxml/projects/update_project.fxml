@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane fx:controller="controllers.projects.UpdateProjectController" xmlns:fx="http://javafx.com/fxml">
+    <VBox spacing="10" padding="10.0">
+        <GridPane hgap="10.0" vgap="10.0">
+            <Label text="Project Name:" />
+            <TextField fx:id="projectNameField" GridPane.columnIndex="1" />
+            <Label text="Description:" GridPane.rowIndex="1" />
+            <TextField fx:id="descriptionField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+            <Label text="Target Audience:" GridPane.rowIndex="2" />
+            <TextField fx:id="targetAudienceField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+            <Label text="Demand in Market:" GridPane.rowIndex="3" />
+            <TextField fx:id="demandInMarketField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+            <Label text="Development Timeline:" GridPane.rowIndex="4" />
+            <TextField fx:id="developmentTimelineField" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+            <Label text="Budget Funding Requirements:" GridPane.rowIndex="5" />
+            <TextField fx:id="budgetFundingRequirementsField" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+            <Label text="Risk Analysis:" GridPane.rowIndex="6" />
+            <TextField fx:id="riskAnalysisField" GridPane.rowIndex="6" GridPane.columnIndex="1" />
+            <Label text="Market Strategy:" GridPane.rowIndex="7" />
+            <TextField fx:id="marketStrategyField" GridPane.rowIndex="7" GridPane.columnIndex="1" />
+            <Label text="Exit Strategy:" GridPane.rowIndex="8" />
+            <TextField fx:id="exitStrategyField" GridPane.rowIndex="8" GridPane.columnIndex="1" />
+            <Label text="Team Background:" GridPane.rowIndex="9" />
+            <TextField fx:id="teamBackgroundField" GridPane.rowIndex="9" GridPane.columnIndex="1" />
+            <Label text="Tags:" GridPane.rowIndex="10" />
+            <TextField fx:id="tagsField" GridPane.rowIndex="10" GridPane.columnIndex="1" />
+            <Label text="Unique Selling Points:" GridPane.rowIndex="11" />
+            <TextField fx:id="uniqueSellingPointsField" GridPane.rowIndex="11" GridPane.columnIndex="1" />
+            <Label text="Daily Price of Assets:" GridPane.rowIndex="12" />
+            <TextField fx:id="dailyPriceOfAssetsField" GridPane.rowIndex="12" GridPane.columnIndex="1" />
+            <Label text="Investors Equity:" GridPane.rowIndex="13" />
+            <TextField fx:id="investorsEquityField" GridPane.rowIndex="13" GridPane.columnIndex="1" />
+        </GridPane>
+        <Button text="Save" onAction="#saveProject" />
+    </VBox>
+</GridPane>
