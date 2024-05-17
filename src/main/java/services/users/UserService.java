@@ -196,7 +196,7 @@ public class UserService implements IService<User> {
             ste = conn.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {
-                String path="C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" +rs.getString("image_name");
+                String path="C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\" +rs.getString("image_name");
                 ImageView img = new ImageView(new Image(path,true));
                 img.setFitHeight(50);
                 img.setFitWidth(50);
@@ -226,7 +226,7 @@ public class UserService implements IService<User> {
             if(rs.next()){
                 System.out.println("fel rs t5al");
                 String query = "update user set status = 1 where id=?";
-                String path="C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\"+rs.getString("image_name");
+                String path="C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\"+rs.getString("image_name");
                 ImageView img = new ImageView(new Image(path,true));
                 img.setFitHeight(50);
                 img.setFitWidth(50);
@@ -283,7 +283,7 @@ public class UserService implements IService<User> {
             ste=conn.createStatement();
             rs= ste.executeQuery(req);
             while(rs.next()){
-                String path="C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\"+rs.getString("image_name");
+                String path="C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\"+rs.getString("image_name");
                 ImageView img = new ImageView(new Image(path,true));
                 img.setFitHeight(50);
                 img.setFitWidth(50);
@@ -304,7 +304,7 @@ public class UserService implements IService<User> {
             rs = ste.executeQuery(req);
 
             while (rs.next()) {
-                String imagePath = "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\";
+                String imagePath = "C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\";
                 String imageFileName = rs.getString("image_name"); // Fetch image filename from the result set
                 String completeFilePath = imagePath + imageFileName;
                 File file = new File(completeFilePath);
@@ -331,7 +331,7 @@ public class UserService implements IService<User> {
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
-                String imagePath = " C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" + rs.getString("image_name");
+                String imagePath = " C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\" + rs.getString("image_name");
 
 
                 Image image = new Image(imagePath, true);
@@ -630,7 +630,7 @@ public class UserService implements IService<User> {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                String path = "file:///" + "C://Users/user/Desktop/Flayes-Flayes-offers - Copie/public/uploads/images/" + resultSet.getString("image_name");
+                String path = "file:///" + "C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\" + resultSet.getString("image_name");
                 ImageView img = new ImageView(new Image(path, true));
                 img.setFitHeight(50);
                 img.setFitWidth(50);

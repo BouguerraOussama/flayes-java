@@ -189,9 +189,10 @@ public class getticket {
             }
         }  */
 // Remplacez ces valeurs par vos propres informations Twilio
-    private static final String ACCOUNT_SID = "AC171c0cb01dd8314558113088a7bfd9d0";
-    private static final String AUTH_TOKEN = "73cd4f1900e6d819414b88ea941bad16";
-    private static final String TWILIO_PHONE_NUMBER = "+18573424232";
+    private static final String ACCOUNT_SID = "AC5a9bddf04d67b67e8965a8ffcdca0817";
+    private static final String AUTH_TOKEN = "47da3d6838b63c14f79d7c2a1f3738f9";
+    private static final String TWILIO_PHONE_NUMBER = "+14123247866";
+
 
     // Remplacez cette valeur par votre propre numéro de téléphone
     private static final String VOTRE_NUMERO = "+21621494353";
@@ -369,7 +370,7 @@ public class getticket {
             Event event = pss.search(eventId);
 
             if (event != null) {
-                String imagePath = "file:///C:/Users/Nourhene/Desktop/semester 1/integration/Flayes-Flayes- - Copy/src/main/resources/images/" + event.getImage();
+                String imagePath = "file:///C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\img\\" + event.getImage();
                 image.setImage(new Image(imagePath));
 
                 eventIdLabel.setText(String.valueOf(event.getIdevent()));
@@ -423,4 +424,3 @@ public class getticket {
         }
     }
 }
-

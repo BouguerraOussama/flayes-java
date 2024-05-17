@@ -100,7 +100,7 @@ public class Profil implements Initializable {
             Image img = new Image(new FileInputStream(filename));
             image.setImage(img);
             //Déplacer l'image
-            String newPath = "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-\\src\\main\\resources\\images\\";
+            String newPath = "C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\";
             File sourceFile = null;
             File destinationFile = null;
             String nFile = f.getName();

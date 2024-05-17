@@ -52,7 +52,7 @@ public class Front {
     @FXML
     private ImageView imageVieww;
     @FXML
-    private AnchorPane MainPageController;
+    private AnchorPane Front;
     @FXML
     private Button btn_user;
 
@@ -69,7 +69,7 @@ public class Front {
         // user = us.getUserConnected();
         user = us.getUserById(SessionManager.getInstance().getUser_id());
         // Get the user and load the image
-        String imagePath =  "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" ;
+        String imagePath =  "C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\" ;
         String imageFileName = user.getImage_name();
         String completeFilePath = imagePath + imageFileName;
         File file = new File(completeFilePath);
@@ -87,8 +87,16 @@ public class Front {
     @FXML
     void HomeButtonClicked(ActionEvent actionEvent) {
         setActive(btn_home);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/fxml/ChatGPPT.fxml"));
+            view = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Main_content.setCenter(view);
         // Get the user and load the image
-        String imagePath =  "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" ;
+        String imagePath =  "C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\" ;
         String imageFileName = user.getImage_name();
         String completeFilePath = imagePath + imageFileName;
         File file = new File(completeFilePath);
@@ -112,7 +120,7 @@ public class Front {
         setActive(btn_project);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/fxml/ChatGPTApp.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/fxml/projects/AddProject.fxml"));
             view = fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -179,7 +187,7 @@ public class Front {
             //user = us.getUserConnected();
             user = us.getUserById(SessionManager.getInstance().getUser_id());
             // Get the user and load the image
-            String imagePath =  "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" ;
+            String imagePath =  "C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\" ;
             String imageFileName = user.getImage_name();
             String completeFilePath = imagePath + imageFileName;
             File file = new File(completeFilePath);
@@ -199,12 +207,12 @@ public class Front {
     @FXML
     void LogoutButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
         setActive(log_out);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/users/SignIn.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/users/register.fxml"));
         Node node = fxmlLoader.load();
         AnchorPane pane = new AnchorPane(node);
         //user = us.getUserConnected();
         user = us.getUserById(SessionManager.getInstance().getUser_id());
-        MainPageController.getChildren().setAll(pane);
+        Front.getChildren().setAll(pane);
         us.logOut(user);
     }
 

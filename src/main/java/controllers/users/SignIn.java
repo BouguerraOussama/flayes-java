@@ -481,7 +481,7 @@ public class SignIn implements Initializable {
                 image.setImage(img);
                 image.setVisible(true);
                 //Déplacer l'image
-                String newPath = "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\";
+                String newPath = "C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\";
                 File sourceFile = null;
                 File destinationFile = null;
                 String nFile = f.getName();

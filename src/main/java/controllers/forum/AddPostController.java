@@ -126,12 +126,13 @@ public class AddPostController {
         fileChooser.setTitle("Select Image File");
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
-            String path = selectedFile.getAbsolutePath();
+            String path = selectedFile.getAbsolutePath().replace(File.separator, "/");
             if (path.endsWith(".jpg") || path.endsWith(".png")) {
                 // The path ends with either .jpg or .png
                 System.out.println("Selected Image Path: " + path);
                 img_path.setText(path);
                 ImportPicture(img_path.getText(),image_view);
+                System.out.println(("post image : "+ img_path.getText()));
             } else {
                 // The path doesn't end with .jpg or .png
                 Alert alert = new Alert(Alert.AlertType.WARNING);

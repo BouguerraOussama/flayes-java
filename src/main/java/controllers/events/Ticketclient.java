@@ -129,11 +129,11 @@ public class Ticketclient {
 
         // Load image from file
         try {
-            String imagePath = "http://localhost/images/" + event.getImage();
+            String imagePath = "file:///C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\img\\"  + event.getImage();
             Image image = new Image(imagePath);
             imageView.setImage(image);
             // Set dimensions of image view
-            imageView.setFitWidth(100); // Set width of image
+            imageView.setFitWidth(150); // Set width of image
             imageView.setFitHeight(100); // Set height of image
         } catch (IllegalArgumentException e) {
             e.printStackTrace(); // Log the exception

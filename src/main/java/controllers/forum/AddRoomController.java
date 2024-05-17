@@ -216,13 +216,13 @@ public class AddRoomController {
     void ImportPicture(ImageView view) {
         // Map category names to image paths
         Map<String, String> categoryImageMap = new HashMap<>();
-        categoryImageMap.put("Finance", "/Users/khalil/Desktop/Java Projects/Forum/Flayes-Flayes-/src/main/resources/images/Finance.jpg");
-        categoryImageMap.put("Agriculture", "/Users/khalil/Desktop/Java Projects/Forum/Flayes-Flayes-/src/main/resources/images/agriculture.jpg");
-        categoryImageMap.put("Industry", "/Users/khalil/Desktop/Java Projects/Forum/Flayes-Flayes-/src/main/resources/images/Industry.jpg");
-        categoryImageMap.put("Art", "/Users/khalil/Desktop/Java Projects/Forum/Flayes-Flayes-/src/main/resources/images/art.jpg");
-        categoryImageMap.put("Business", "/Users/khalil/Desktop/Java Projects/Forum/Flayes-Flayes-/src/main/resources/images/business.jpg");
-        categoryImageMap.put("Manufacturing", "/Users/khalil/Desktop/Java Projects/Forum/Flayes-Flayes-/src/main/resources/images/manufacturing.jpg"); // Assuming this is correct
-        categoryImageMap.put("Education", "/Users/khalil/Desktop/Java Projects/Forum/Flayes-Flayes-/src/main/resources/images/education.jpg");
+        categoryImageMap.put("Finance", "C:\\Users\\user\\Desktop\\flayes-java\\src\\main\\resources\\images\\Finance.jpg");
+        categoryImageMap.put("Agriculture", "C:\\Users\\user\\Desktop\\flayes-java\\src\\main\\resources\\images\\agriculture.jpg");
+        categoryImageMap.put("Industry", "C:\\Users\\user\\Desktop\\flayes-java\\src\\main\\resources\\images\\Industry.jpg");
+        categoryImageMap.put("Art", "C:\\Users\\user\\Desktop\\flayes-java\\src\\main\\resources\\images\\art.jpg");
+        categoryImageMap.put("Business", "C:\\Users\\user\\Desktop\\flayes-java\\src\\main\\resources\\images\\business.jpg");
+        categoryImageMap.put("Manufacturing", "C:\\Users\\user\\Desktop\\flayes-java\\src\\main\\resources\\images\\manufacturing.jpg"); // Assuming this is correct
+        categoryImageMap.put("Education", "C:\\Users\\user\\Desktop\\flayes-java\\src\\main\\resources\\images\\education.jpg");
 
         // Get the selected category
         String selectedCategory = categoryTF.getValue();

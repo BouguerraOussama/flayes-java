@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="760.0" prefWidth="1230.0" stylesheets="/style/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.mainPage.Front">
+<AnchorPane fx:id="Front" prefHeight="760.0" prefWidth="1230.0" stylesheets="/style/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.mainPage.Front">
     <children>
         <Pane layoutX="300.0" layoutY="-200.0" prefHeight="430.0" prefWidth="315.0" rotate="-35.5" style="-fx-background-color: #535C91; -fx-background-radius: 40;" />
         <BorderPane fx:id="Main_content" prefHeight="760.0" prefWidth="1230.0">
@@ -151,6 +151,17 @@
                             <Font name="Century Gothic Bold" size="13.0" />
                         </font>
                         </Button>
+                        <Button fx:id="log_out" mnemonicParsing="false" onAction="#LogoutButtonClicked" prefHeight="50.0" prefWidth="250.0" stylesheets="/style/Main.css" text="LogOut" textFill="WHITE">
+                            <graphic>
+                                <ImageView fitHeight="34.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="/images/logout.png" />
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Century Gothic Bold" size="13.0" />
+                            </font>
+                        </Button>
+
                     </children>
                     <BorderPane.margin>
                         <Insets />
@@ -172,7 +183,7 @@
                                     </viewport>
                                 </ImageView>
                                 <Button fx:id="profil" mnemonicParsing="false" onAction="#profilButtonClicked" prefHeight="57.0" prefWidth="60.0" layoutX="95.0"/>
-                                <Label layoutX="70.0" layoutY="49.0" prefHeight="17.0" prefWidth="115.0" text="WAMYA TJIK LAMYA" textFill="WHITE"  />
+                                <Label layoutX="70.0" layoutY="49.0" prefHeight="17.0" prefWidth="115.0" text="" textFill="WHITE"  />
                             </children>
                         </Pane>
                     </children>

@@ -67,7 +67,7 @@ public class MainPageController {
 
         user=us.getUserById(SessionManager.getInstance().getUser_id());
         // Get the user and load the image
-        String imagePath =  "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" ;
+        String imagePath =  "C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\" ;
         String imageFileName = user.getImage_name();
         String completeFilePath = imagePath + imageFileName;
         File file = new File(completeFilePath);
@@ -84,7 +84,7 @@ public class MainPageController {
     void HomeButtonClicked(ActionEvent actionEvent) {
         setActive(btn_home);
         // Get the user and load the image
-        String imagePath = "C:\\Users\\user\\Desktop\\Nouveau dossier\\Nouveau dossier\\Flayes-Flayes-\\src\\main\\resources\\images\\";
+        String imagePath = "C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\";
         String imageFileName = "femme.png";
         String completeFilePath = imagePath + imageFileName;
         File file = new File(completeFilePath);
@@ -102,7 +102,7 @@ public class MainPageController {
         setActive(btn_project);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/fxml/projects/AddProject.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/fxml/projects/ProjectCard.fxml"));
             view = fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -145,7 +145,7 @@ public class MainPageController {
         setActive(btn_forum);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/fxml/forum/AddRoom.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/fxml/forum/AddRoomback.fxml"));
             AddRoomController AddRoom = fxmlLoader.getController();
             view = fxmlLoader.load();
         }  catch (IOException e) {
@@ -164,7 +164,7 @@ public class MainPageController {
             //user = us.getUserConnected();
             user=us.getUserById(SessionManager.getInstance().getUser_id());
             // Get the user and load the image
-            String imagePath =  "C:\\Users\\user\\Desktop\\Flayes-Flayes-offers - Copie\\public\\uploads\\images\\" ;
+            String imagePath =  "C:\\Users\\user\\Desktop\\Nouveau dossier (4)\\Flayes-Flayes\\public\\uploads\\images\\" ;
             String imageFileName = user.getImage_name();
             String completeFilePath = imagePath + imageFileName;
             File file = new File(completeFilePath);
@@ -184,7 +184,7 @@ public class MainPageController {
     @FXML
     void LogoutButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
         setActive(log_out);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/users/SignIn.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/users/register.fxml"));
         Node node = fxmlLoader.load();
         AnchorPane pane = new AnchorPane(node);
         //user = us.getUserConnected();
