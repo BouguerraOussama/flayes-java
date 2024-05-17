@@ -84,6 +84,7 @@ public class MainPageController {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
         projectTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
         projectTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> displayProjectDetails(newValue)
         );
@@ -105,7 +106,6 @@ public class MainPageController {
             // Handle errors or notify the user here
         }
     }
-
     private void displayProjectDetails(Project project) {
         if (project != null) {
             projectNameLabel.setText(project.getName());
@@ -157,6 +157,7 @@ public class MainPageController {
         }
     }
 
+
     public void handleDeleteButton(ActionEvent event) {
         try {
             // Load the FXML file for the project interface
@@ -165,6 +166,7 @@ public class MainPageController {
 
             // Get the controller of the project interface
             DeleteCategoryController deleteCategory = loader1.getController();
+
 
             // Create a new stage for the project interface
             Stage projectStage = new Stage();
@@ -179,29 +181,27 @@ public class MainPageController {
     }
 
     public void handleUpdateButton(ActionEvent event) {
-        Project selectedProject = projectTableView.getSelectionModel().getSelectedItem();
-        if (selectedProject != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/projects/update_project.fxml"));
-                Parent root = loader.load();
+        try {
+            // Load the FXML file for the project interface
+            FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/fxml/projects/update_categorie.fxml"));
+            Parent root1 = loader1.load();
 
-                // Get the controller and pass the selected project to it
-                UpdateProjectController updateController = loader.getController();
-                updateController.initData(selectedProject);
+            // Get the controller of the project interface
+            UpdateCategoryController deleteCategory = loader1.getController();
 
-                // Create a new stage for the update interface
-                Stage projectStage = new Stage();
-                projectStage.setTitle("Update Project");
-                projectStage.setScene(new Scene(root));
-                projectStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            showAlert("No Selection", "Please select a project to update.", Alert.AlertType.WARNING);
+
+            // Create a new stage for the project interface
+            Stage projectStage = new Stage();
+            projectStage.setTitle("delete categorie");
+            projectStage.setScene(new Scene(root1));
+
+            // Show the project interface
+            projectStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
 
+    }
     public void stop() {
         // Stop the animation when leaving the scene
         timeline.stop();
@@ -215,6 +215,7 @@ public class MainPageController {
 
             // Get the controller of the project interface
             AddCategoryController deleteCategory = loader1.getController();
+
 
             // Create a new stage for the project interface
             Stage projectStage = new Stage();
@@ -237,6 +238,7 @@ public class MainPageController {
             // Get the controller of the project interface
             AddCategoryController deleteCategory = loader1.getController();
 
+
             // Create a new stage for the project interface
             Stage projectStage = new Stage();
             projectStage.setTitle("delete categorie");
@@ -247,6 +249,7 @@ public class MainPageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public void handleUppProjectButton(ActionEvent event) {
@@ -258,6 +261,7 @@ public class MainPageController {
             // Get the controller of the project interface
             UpdateProjectController Update = loader1.getController();
 
+
             // Create a new stage for the project interface
             Stage projectStage = new Stage();
             projectStage.setTitle("delete categorie");
@@ -268,7 +272,9 @@ public class MainPageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
+
 
     public void handleDeleteProjectAction(ActionEvent event) {
         Project selectedProject = projectTableView.getSelectionModel().getSelectedItem();

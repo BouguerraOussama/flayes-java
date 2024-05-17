@@ -1,10 +1,19 @@
 package controllers.projects;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.DatePicker;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import models.projects.Project;
 import services.projects.ProjectService;
+
+import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class UpdateProjectController {
 
@@ -12,101 +21,115 @@ public class UpdateProjectController {
     private TextField projectNameField;
 
     @FXML
-    private TextField descriptionField;
+    private TextArea descriptionTextArea;
 
     @FXML
-    private TextField targetAudienceField;
+    private TextField budgetField;
 
     @FXML
-    private TextField demandInMarketField;
+    private TextField sellingPointsField;
 
     @FXML
-    private TextField developmentTimelineField;
+    private TextArea teamBackgroundTextArea;
 
     @FXML
-    private TextField budgetFundingRequirementsField;
+    private TextArea marketStrategyTextArea;
 
     @FXML
-    private TextField riskAnalysisField;
+    private TextArea tagsTextArea;
 
     @FXML
-    private TextField marketStrategyField;
+    private TextField riskPercentageField;
 
     @FXML
-    private TextField exitStrategyField;
+    private DatePicker startDatePicker;
 
     @FXML
-    private TextField teamBackgroundField;
+    private DatePicker endDatePicker;
 
     @FXML
-    private TextField tagsField;
-
-    @FXML
-    private TextField uniqueSellingPointsField;
-
-    @FXML
-    private TextField dailyPriceOfAssetsField;
-
-    @FXML
-    private TextField investorsEquityField;
+    private ImageView projectImageView;
 
     private Project currentProject;
-
-    public void initData(Project project) {
+    // In UpdateProjectController
+    public void setCurrentProject(Project project) {
         this.currentProject = project;
-        populateFields();
+        populateUI(); // Make sure this method exists and correctly initializes the UI components
     }
-
-    private void populateFields() {
+    private void populateUI() {
         if (currentProject != null) {
             projectNameField.setText(currentProject.getName());
-            descriptionField.setText(currentProject.getDescription());
-            targetAudienceField.setText(currentProject.getTargetAudience());
-            demandInMarketField.setText(currentProject.getDemandInMarket());
-            developmentTimelineField.setText(currentProject.getDevelopmentTimeline());
-            budgetFundingRequirementsField.setText(String.valueOf(currentProject.getBudgetFundingRequirements()));
-            riskAnalysisField.setText(currentProject.getRiskAnalysis());
-            marketStrategyField.setText(currentProject.getMarketStrategy());
-            exitStrategyField.setText(currentProject.getExitStrategy());
-            teamBackgroundField.setText(currentProject.getTeamBackground());
-            tagsField.setText(currentProject.getTags());
-            uniqueSellingPointsField.setText(currentProject.getUniqueSellingPoints());
-            dailyPriceOfAssetsField.setText(currentProject.getDailyPriceOfAssets());
-            investorsEquityField.setText(currentProject.getInvestorsEquity());
+            descriptionTextArea.setText(currentProject.getDescription());
+            // Populate other fields similarly
         }
     }
 
+
+
+    // Method to initialize controller with project data
+    public void initializeWithProjectData(Project project) {
+        this.currentProject = project;
+        projectNameField.setText(project.getName());
+        descriptionTextArea.setText(project.getDescription());
+        budgetField.setText(String.valueOf(project.getBudgetFundingRequirements()));
+        sellingPointsField.setText(project.getUniqueSellingPoints());
+        teamBackgroundTextArea.setText(project.getTeamBackground());
+        marketStrategyTextArea.setText(project.getMarketStrategy());
+        tagsTextArea.setText(project.getTags());
+        riskPercentageField.setText(project.getRiskAnalysis());
+        // Initialize startDatePicker and endDatePicker if your project model supports these fields
+        // projectImageView.setImage(new Image(project.getImagePath())); // Assuming you have a way to get image path
+
+        // Placeholder for date pickers and image view initialization
+        // startDatePicker.setValue(LocalDate.parse(project.getStartDate()));
+        // endDatePicker.setValue(LocalDate.parse(project.getEndDate()));
+        // projectImageView.setImage(new Image(project.getImagePath()));
+    }
+
+    // Method to handle the save button action
     @FXML
-    private void saveProject(Project currentProject) {
-        if (currentProject != null) {
-            currentProject.setName(projectNameField.getText());
-            currentProject.setDescription(descriptionField.getText());
-            currentProject.setTargetAudience(targetAudienceField.getText());
-            currentProject.setDemandInMarket(demandInMarketField.getText());
-            currentProject.setDevelopmentTimeline(developmentTimelineField.getText());
-            currentProject.setBudgetFundingRequirements(Double.parseDouble(budgetFundingRequirementsField.getText()));
-            currentProject.setRiskAnalysis(riskAnalysisField.getText());
-            currentProject.setMarketStrategy(marketStrategyField.getText());
-            currentProject.setExitStrategy(exitStrategyField.getText());
-            currentProject.setTeamBackground(teamBackgroundField.getText());
-            currentProject.setTags(tagsField.getText());
-            currentProject.setUniqueSellingPoints(uniqueSellingPointsField.getText());
-            currentProject.setDailyPriceOfAssets(dailyPriceOfAssetsField.getText());
-            currentProject.setInvestorsEquity(investorsEquityField.getText());
-
-            try {
-                ProjectService projectService = new ProjectService();
-                projectService.updateProject(currentProject);
-                showAlert("Project Updated", "The project has been successfully updated.", Alert.AlertType.INFORMATION);
-            } catch (Exception e) {
-                e.printStackTrace();
-                showAlert("Update Failed", "An error occurred while updating the project.", Alert.AlertType.ERROR);
+    void saveProject(ActionEvent event) {
+        try {
+            // Validate input
+            if (!validateInput()) {
+                showAlert("Validation Error", "Please fill in all required fields correctly.", Alert.AlertType.ERROR);
+                return;
             }
-        } else {
-            showAlert("No Project Selected", "No project is selected for updating.", Alert.AlertType.WARNING);
+
+            // Update project with new data from UI elements
+            currentProject.setName(projectNameField.getText());
+            currentProject.setDescription(descriptionTextArea.getText());
+            currentProject.setBudgetFundingRequirements(Double.parseDouble(budgetField.getText()));
+            currentProject.setUniqueSellingPoints(sellingPointsField.getText());
+            currentProject.setTeamBackground(teamBackgroundTextArea.getText());
+            currentProject.setMarketStrategy(marketStrategyTextArea.getText());
+            currentProject.setTags(tagsTextArea.getText());
+            currentProject.setRiskAnalysis(riskPercentageField.getText());
+            // Update other fields like start and end dates, image path, etc., as necessary
+
+            ProjectService projectService = new ProjectService();
+            boolean success = projectService.updateProject(currentProject);
+            if (success) {
+                showAlert("Success", "Project updated successfully.", Alert.AlertType.INFORMATION);
+                closeStage();
+            } else {
+                showAlert("Failed", "Failed to update project.", Alert.AlertType.ERROR);
+            }
+        } catch (SQLException e) {
+            showAlert("Database Error", "Error updating project: " + e.getMessage(), Alert.AlertType.ERROR);
+        } catch (NumberFormatException e) {
+            showAlert("Input Error", "Please enter valid numbers for budget and risk percentage.", Alert.AlertType.ERROR);
         }
     }
 
+    // Validate user input
+    private boolean validateInput() {
+        // Implement validation logic, return false if validation fails
+        return !projectNameField.getText().isEmpty() && !descriptionTextArea.getText().isEmpty();
+        // Add further validation as necessary
+    }
+
+    // Utility method to show alert dialogs
     private void showAlert(String title, String content, Alert.AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -115,5 +138,9 @@ public class UpdateProjectController {
         alert.showAndWait();
     }
 
-
+    // Close the stage of this controller
+    private void closeStage() {
+        Stage stage = (Stage) projectNameField.getScene().getWindow();
+        stage.close();
+    }
 }

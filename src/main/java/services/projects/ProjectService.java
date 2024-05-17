@@ -226,7 +226,12 @@ public class ProjectService {
 
     public List<Project> getProjectsWithCategoryNames() throws SQLException {
         List<Project> projects = new ArrayList<>();
-        String sql = "SELECT p.name, c.category_name FROM projects p INNER JOIN categories c ON p.category_id = c.id";
+        String sql = "SELECT p.name, c.category_name, p.description, p.target_audience, p.demand_in_market, \n" +
+                "       p.development_timeline, p.budget_funding_requirements, p.risk_analysis, \n" +
+                "       p.market_strategy, p.exit_strategy, p.team_background, p.tags, \n" +
+                "       p.unique_selling_points, p.daily_price_of_assets, p.investors_equity\n" +
+                "FROM projects p \n" +
+                "INNER JOIN categories c ON p.category_id = c.id;\n";
 
         try (Connection conn = MyDataBase.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -236,6 +241,19 @@ public class ProjectService {
                 Project project = new Project();
                 project.setName(rs.getString("name"));
                 project.setCategoryName(rs.getString("category_name"));
+                project.setDescription(rs.getString("description"));
+                project.setTargetAudience(rs.getString("target_audience"));
+                project.setDemandInMarket(rs.getString("demand_in_market"));
+                project.setDevelopmentTimeline(rs.getString("development_timeline"));
+                project.setBudgetFundingRequirements(rs.getDouble("budget_funding_requirements"));
+                project.setRiskAnalysis(rs.getString("risk_analysis"));
+                project.setMarketStrategy(rs.getString("market_strategy"));
+                project.setExitStrategy(rs.getString("exit_strategy"));
+                project.setTeamBackground(rs.getString("team_background"));
+                project.setTags(rs.getString("tags"));
+                project.setUniqueSellingPoints(rs.getString("unique_selling_points"));
+                project.setDailyPriceOfAssets(rs.getString("daily_price_of_assets"));
+                project.setInvestorsEquity(rs.getString("investors_equity"));
                 projects.add(project);
             }
         }
